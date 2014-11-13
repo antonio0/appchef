@@ -1,0 +1,37 @@
+//
+//  DataSourceCollection.swift
+//  GeneratedApp
+//
+//  Created by Mark on 13/11/2014.
+//  Copyright (c) 2014 Team Goat. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+
+class DataSetsCollection {
+    
+    var _datasets = [Int: DataSet]()
+    
+    var appDelegate: AppDelegate
+    
+    init () {
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    }
+
+    func create (id: Int) {
+        
+        var newDataSet = DataSet()
+        _datasets[id] = newDataSet
+        
+    }
+
+
+    func getDataSet (id: Int) -> DataSet? {
+        
+        return _datasets[id]
+        
+    }
+
+}

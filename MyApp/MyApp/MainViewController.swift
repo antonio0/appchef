@@ -8,11 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
+    var appDelegate: AppDelegate
+
+    required init(coder decoder: NSCoder) {
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+
+        super.init(coder: decoder)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        
+        // Generate Pages
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
