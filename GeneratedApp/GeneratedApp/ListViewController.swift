@@ -69,33 +69,36 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
         
         var CellElements = ElementsCollection(view: cell!.contentView)
         
+        var idcount = 0;
+        
         for Obj in Elements.getElements() {
             
-            var dataKey = Obj["source"] as String?
             
-            if dataKey == nil {
+            var type = Obj["type"] as String?
+            
+            if type == nil {
                 continue
             }
             
-            println(Obj)
+            var element: AnyObject? = Obj[type!]
             
-            for type in Obj.keys {
-                
-                if type == "source" {
-                    continue
-                }
-                
-                var element: AnyObject? = Obj[type]
-                
-                println(type)
-                
-                if type == "UILabel" {
+            switch (type!) {
+                case "UILabel":
+                    
+                    var dataKey = Obj["source"] as String?
+                    
+                    if dataKey == nil {
+                        continue
+                    }
+                    
                     element = element as UILabel
-                    CellElements.addStaticLabel(row![dataKey!]!)
+                    CellElements.addStaticLabel(idcount, text: row![dataKey!]!)
                     println("adding \(row![dataKey!]!)")
-                }
-                
+                default:
+                1+1
             }
+            idcount = idcount + 1;
+            
         }
         
         

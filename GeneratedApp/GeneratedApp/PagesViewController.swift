@@ -19,17 +19,28 @@ class PageViewController: UIViewController {
     // basically the initialiser
     func setId(id: Int) {
         self._id = id
-        Elements = ElementsCollection(view: self.view)
+        Elements = ElementsCollection(viewController: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
         mainViewController = appDelegate!.mainViewController
+        
+//        var bar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 64))
+//        var item = UINavigationItem(title: "main")
+//        self.view.addSubview(bar)
+//
+//        bar.pushNavigationItem(item, animated: false)
+//
+//        var next = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "test")
+//        item.rightBarButtonItem = next
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    
+    func test () {
+        println("clicked")
+    }
     
     
     

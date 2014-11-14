@@ -34,8 +34,13 @@ class ViewController: UIViewController {
         
         Pages!.create(0)
         Pages!.create(1)
+
         
-       // Pages!.getPage(1)!.Elements!.addStaticLabel("sdfsdf")
+        Pages!.getPage(1)!.Elements!.addNavBar(0, text: "Basket")
+        Pages!.getPage(1)!.Elements!.addNavBarButton("left", place: .Left)
+        Pages!.getPage(1)!.Elements!.addNavBarButton("left", place: .Right)
+        
+        Pages!.getPage(1)!.Elements!.addStaticLabel(22, text: "sdfsdf")
 
         DataSets!.create(0, name: "items", API: "https://hcssdmkprq.localtunnel.me", keys: [ "sku", "name", "color", "detail", "price", "brand"] )
         DataSets!.create(1, name: "basket", keys: [ "aasd", "asdasd"] )
@@ -43,11 +48,12 @@ class ViewController: UIViewController {
     
         Pages!.getPage(0)!.addList(0, source: 0)
         
-        Lists!.getList(0)!.Elements.addDynamicLabel("name")
-        Lists!.getList(0)!.Elements.addDynamicLabel("price")
+        Lists!.getList(0)!.Elements.addDynamicLabel(234, text: "name")
+        Lists!.getList(0)!.Elements.addDynamicLabel(324, text: "price")
         
         
-        Pages!.showPage(0)
+        
+        Pages!.showPage(1)
 
         
         
