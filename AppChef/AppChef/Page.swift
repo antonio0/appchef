@@ -33,7 +33,10 @@ class Page {
     
     
     func addElement(uiViewElementToBeAdded: UIView, type: String) {
-        let element = Element(uiElement: uiViewElementToBeAdded, type: type)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        let element = Element(uiElement: uiViewElementToBeAdded, type: type, id: appDelegate.newID())
         self.elements.append(element)
         self.view.addSubview(uiViewElementToBeAdded)
     }

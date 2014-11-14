@@ -12,7 +12,7 @@ import UIKit
 class Bindings {
     
     
-    var _sourceBindings: [Int: [String: Int]] = []
+    var _sourceBindings: [Int: [String: Int]] = [:]
     
     init () {
         
