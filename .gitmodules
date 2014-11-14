@@ -1,0 +1,3 @@
+[submodule "GeneratedApp/Alamofire"]
+	path = GeneratedApp/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
