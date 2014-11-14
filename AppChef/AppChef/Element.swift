@@ -10,20 +10,44 @@ import Foundation
 import UIKit
 
 class Element {
+    var id: Int
     var uiElement : UIView
     var type:  String
     var cellElements: [Element] = []
     var source : Int?
     
     var dataSet: DataSet?
+    var appDelegate: AppDelegate
+    var bindings: Bindings
     
-    init(uiElement: UIView, type: String) {
+    init(uiElement: UIView, type: String, id: Int) {
+        self.id        = id
         self.uiElement = uiElement
         self.type      = type
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        bindings = appDelegate.bindings!
     }
     
     func toJSON() -> NSString {
         return Helper.JSONStringify(self.toDictionary(), prettyPrinted: false)
+    }
+    
+    func createAddToDataSourceAction(dataSource: Int) {
+        let sourceBidings = bindings._sourceBindings[dataSource]!
+        var onClickAction = [String: AnyObject]()
+        onClickAction["dataset"] = dataSource
+        onClickAction["action"]  = "add"
+        
+        var itemsToAdd: [[String: String]] = []
+        for (bindingKey, bindingValue) in sourceBidings {
+            var dict = [String: String]()
+            dict["key"] = bindingKey
+            dict["sourceElementId"] = "\(bindingValue)"
+            itemsToAdd.append(dict)
+        }
+        
+        onClickAction["itemsToAdd"] = itemsToAdd
+        
     }
     
     func elementToDictionary(element:Element) -> [String: AnyObject] {

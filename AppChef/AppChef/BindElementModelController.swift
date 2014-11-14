@@ -28,7 +28,8 @@ class BindElementModelController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func createAddAction(sender: AnyObject) {
-//        bindings?.addSourceBinding(dataSet: currDS!, el ement: currElement, key: "addToDataSet")
+// bindings?.addSourceBinding(dataSet: currDS!, el ement: currElement, key: "addToDataSet")
+// appDelegate!.elements.getElement(currElement).createAddToDataSourceAction(currDataSource)
         
     }
     
