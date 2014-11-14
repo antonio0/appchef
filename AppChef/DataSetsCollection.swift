@@ -11,16 +11,25 @@ import UIKit
 
 class DataSetsCollection : NSObject {
     
-    var datasets : [DataSet] = []
+    var datasets = [Int: DataSet]()
     
     override init() {
         
     }
     
     func create(name:String, type: ModelType, keys: [String]) {
-        var newDataSet = DataSet(name: name, type: type)
+        var id =  Int(arc4random_uniform(834752))
+        var newDataSet = DataSet(name: name, type: type, id: id)
         newDataSet.keys = keys
-        self.datasets.append(newDataSet)
+        self.datasets[id] = newDataSet
+    }
+    
+    func dataSetArray() -> [DataSet] {
+        var dses: [DataSet] = []
+        for (key, value) in datasets {
+            dses.append(value)
+        }
+        return dses
     }
     
     func toJSON() {

@@ -38,10 +38,10 @@ class Page {
         self.view.addSubview(uiViewElementToBeAdded)
     }
     
-    func getElement (point: CGPoint) -> UIView? {
+    func getElement (point: CGPoint) -> Element? {
         for element in self.elements {
             if CGRectContainsPoint(element.uiElement.frame, point) {
-                return element.uiElement
+                return element
             }
         }
         return nil

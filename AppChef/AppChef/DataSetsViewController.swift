@@ -12,6 +12,7 @@ import UIKit
 class DataSetsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
     
     var dataSetsCollection : DataSetsCollection?
+    var pagesCollection : PagesCollection?
     var appDelegate: AppDelegate?
 //    var path = UIBezierPath();
 //    var shapeLayer = CAShapeLayer();
@@ -35,7 +36,7 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
         dataSetsCollection = appDelegate!.dataSetsCollection
-
+        self.pagesCollection = appDelegate!.pagesCollection;
         
         panGesture = UIPanGestureRecognizer(target: self, action: "panGestureDetected:")
         
@@ -66,6 +67,9 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         return nil
     }
     
+    
+    var startDSId: Int?
+    
     func panGestureDetected(recognizer:UIPanGestureRecognizer) {
         println("pan")
         let translation = recognizer.translationInView(self.view)
@@ -73,9 +77,10 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         if dragging == false {
             
             var cell = getCell(recognizer.locationInView(self.view))
+            
             if cell != nil {
                 start = cell!.center
-                
+                startDSId = cell!.tag
                 start = CGPoint(x: start!.x + (mainVC!.view.bounds.width - 150), y: start!.y + 60 )
                 dragging = true
             }
@@ -95,7 +100,8 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
             
             if(recognizer.state == .Ended) {
                 dragging = false
-                endMoveLine(recognizer.locationInView(mainVC!.view))
+                endMoveLine(recognizer.locationInView(mainVC!.view), dataSet: appDelegate!.dataSetsCollection!.datasets[startDSId!]!)
+
             } else {
                 moveLine(recognizer.locationInView(mainVC!.view))
             }
@@ -117,9 +123,11 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         
         if(cell == nil) {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-        
-            cell!.textLabel.text = self.appDelegate!.dataSetsCollection!.datasets[indexPath.row].name;
+            let dataSet: DataSet = self.appDelegate!.dataSetsCollection!.dataSetArray()[indexPath.row];
+            cell!.tag = dataSet.id
+            cell!.textLabel.text = dataSet.name;
         }
+        
         cell!.selectionStyle = .None
 
             return cell!;
@@ -150,16 +158,63 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         mainVC!.shapeLayer.lineWidth = 2;
         mainVC!.shapeLayer.fillColor = UIColor.clearColor().CGColor;
         mainVC!.view.layer.addSublayer(mainVC!.shapeLayer)
+        
+        if let foundElement = self.pagesCollection!.activePage?.getElement(to) {
+             startWiggle(foundElement.uiElement)
+             self.wigglingElement = foundElement.uiElement
+        } else {
+            if wiggle {
+                stopWiggle()
+            }
+        }
+        
+        
+        
     }
     
-    func endMoveLine(point: CGPoint) {
+    var wigglingElement: UIView?
+    
+    func radians(r: Double) -> CGFloat {
+        return (CGFloat)((r * M_PI) / 180.0);
+    }
+    
+    
+    func startWiggle(elementToWiggle: UIView) {
+        var rightWobble = CGAffineTransformRotate(CGAffineTransformIdentity, radians(5.0));
+        
+        wiggle = true
+        UIView.animateWithDuration(0.18, delay: 0.0, options: (UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse), animations: {
+            elementToWiggle.transform = rightWobble
+            }, completion: nil);
+        
+    }
+    
+    func stopWiggle() {
+        
+        wiggle = false
+        UIView.animateWithDuration(0.18, delay: 0.0, options: (UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState | UIViewAnimationOptions.CurveLinear), animations: {
+            self.wigglingElement!.transform =  CGAffineTransformIdentity
+            }, completion: nil);
+        
+    }
+
+    
+    
+    func endMoveLine(point: CGPoint, dataSet: DataSet) {
         dragging = false;
         start = nil;
-        //stopWiggle()
+        stopWiggle()
         mainVC!.shapeLayer.path = nil;
+        
+    
+        if let foundElement = self.pagesCollection!.activePage?.getElement(point) {
+            bindElementToModel(foundElement, dataSet: dataSet)
+        }
     }
     
-    
+    func bindElementToModel(element: Element, dataSet: DataSet) {
+        
+    }
 
 
 }

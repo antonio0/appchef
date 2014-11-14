@@ -198,6 +198,7 @@ class MainEditViewController: UIViewController
            
         })
         
+        
     }
     
     func addAndShowUIViewWithAnimation(viewToAdd: UIView) {
@@ -221,6 +222,8 @@ class MainEditViewController: UIViewController
                 addElementsView.alpha = 0
             })
             
+            self.overScreenMenu = false;
+
         }
     }
     
@@ -234,12 +237,12 @@ class MainEditViewController: UIViewController
         
         if let pagesManagerView = self.view.viewWithTag(EditViewTags.PagesManager.rawValue) {
             self.hideUIViewWithAnimationAndRemove(pagesManagerView)
-               self.overScreenMenu = false
+            self.overScreenMenu = false
         } else if let addElementsView = self.view.viewWithTag(EditViewTags.AddElements.rawValue) {
-            if addElementsView.alpha == 1 {
+//            if addElementsView.alpha == 1 {
                 self.hideUIViewWithAnimationAndRemove(addElementsView)
                 self.overScreenMenu = false;
-            }
+//            }
         } else {
             self.addAndShowUIViewWithAnimation(self.addElements!.view)
             self.overScreenMenu = true;

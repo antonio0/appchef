@@ -15,6 +15,8 @@ class Element {
     var cellElements: [Element] = []
     var source : Int?
     
+    var dataSet: DataSet?
+    
     init(uiElement: UIView, type: String) {
         self.uiElement = uiElement
         self.type      = type
@@ -39,20 +41,20 @@ class Element {
         if(self.type == "button") {
             let button = self.uiElement as UIButton;
             dictionary["text"]      = button.titleLabel!.text
-            dictionary["textColor"] = button.titleLabel!.textColor
+//            dictionary["textColor"] = button.titleLabel!.textColor
             
         } else if (self.type == "label") {
             let label = self.uiElement as UILabel;
             
             dictionary["text"]      = label.text
-            dictionary["textColor"] = label.textColor
+//            dictionary["textColor"] = label.textColor
             
         } else if (self.type == "input") {
             let label = self.uiElement as UILabel;
             
             dictionary["text"]          = label.text
-            dictionary["textColor"]     = label.textColor
-            dictionary["background"]    = label.backgroundColor
+//            dictionary["textColor"]     = label.textColor
+//            dictionary["background"]    = label.backgroundColor
             
         } else if (self.type == "image") {
             
@@ -75,6 +77,6 @@ class Element {
             dictionary["cell"] = cellElements
         }
         
-        return self.toDictionary()
+        return dictionary
     }
 }

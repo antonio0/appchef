@@ -11,6 +11,7 @@ import UIKit
 
 
 class DataSet {
+    var id: Int
     var keys : [String] = []
     var type: ModelType
     var apiUrl: String?
@@ -18,7 +19,8 @@ class DataSet {
 //    var id: Int
     var name: String
     
-    init(name: String, type: ModelType) {
+    init(name: String, type: ModelType, id: Int) {
+        self.id = id
         self.name = name;
         self.type = type;
     }
