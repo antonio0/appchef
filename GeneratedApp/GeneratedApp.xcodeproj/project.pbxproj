@@ -47,6 +47,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D846D471A158444002FE10D /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				4DEC89191A156B7F0052B935 /* PagesCollection.swift */,
+				4D846D451A157173002FE10D /* DataSetCollection.swift */,
+			);
+			name = Collections;
+			sourceTree = "<group>";
+		};
+		4D846D481A15845D002FE10D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4D846D411A157123002FE10D /* ListViewController.swift */,
+				4DEC891B1A156B910052B935 /* PagesViewController.swift */,
+				4D846D431A15716B002FE10D /* DataSet.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		4DEC88E81A156B580052B935 = {
 			isa = PBXGroup;
 			children = (
@@ -66,13 +85,10 @@
 		4DEC88F31A156B580052B935 /* GeneratedApp */ = {
 			isa = PBXGroup;
 			children = (
+				4D846D481A15845D002FE10D /* Classes */,
+				4D846D471A158444002FE10D /* Collections */,
 				4DEC88F61A156B580052B935 /* AppDelegate.swift */,
 				4DEC88FB1A156B580052B935 /* MainViewController.swift */,
-				4DEC89191A156B7F0052B935 /* PagesCollection.swift */,
-				4DEC891B1A156B910052B935 /* PagesViewController.swift */,
-				4D846D431A15716B002FE10D /* DataSet.swift */,
-				4D846D451A157173002FE10D /* DataSetCollection.swift */,
-				4D846D411A157123002FE10D /* ListViewController.swift */,
 				4DEC88FD1A156B580052B935 /* Main.storyboard */,
 				4DEC89001A156B580052B935 /* Images.xcassets */,
 				4DEC89021A156B580052B935 /* LaunchScreen.xib */,

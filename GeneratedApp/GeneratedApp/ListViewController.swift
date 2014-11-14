@@ -11,13 +11,18 @@ import UIKit
 
 class ListViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var tableItems: [String] = []
+    var _dataSet: DataSet?
     
+    var tableItems: [String] = []
+   
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     
+    func setDataSet(dataSet: DataSet) {
+        _dataSet = dataSet
+    }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
     // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
@@ -42,7 +47,7 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tableItems.count
+        return self._dataSet!.numItems()
     }
     
     //

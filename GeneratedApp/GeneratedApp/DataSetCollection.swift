@@ -20,9 +20,16 @@ class DataSetsCollection {
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     }
 
-    func create (id: Int) {
+    func create (id: Int, name: String, API: String, keys: [String]) {
         
-        var newDataSet = DataSet()
+        var newDataSet = DataSet(id: id, name: name, API: API, keys: keys)
+        _datasets[id] = newDataSet
+        
+    }
+
+    func create (id: Int, name: String, keys: [String]) {
+        
+        var newDataSet = DataSet(id: id, name: name, keys: keys)
         _datasets[id] = newDataSet
         
     }

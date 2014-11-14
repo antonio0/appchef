@@ -15,13 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var Pages: PagesCollection?
-    
+    var DataSets: DataSetsCollection?
+
     var mainViewController: UIViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         mainViewController = self.window!.rootViewController
         Pages = PagesCollection()
+        DataSets = DataSetsCollection()
+
         
         return true
     }

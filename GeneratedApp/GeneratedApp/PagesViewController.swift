@@ -42,6 +42,9 @@ class PageViewController: UIViewController {
     func addList(id: Int, source: Int) {
         
         let listView = ListViewController()
+        let dataSource = appDelegate!.DataSets?.getDataSet(source)
+        listView.setDataSet(dataSource!)
+        
         
         listView.view.center = self.view.center;
         self.addChildViewController(listView)

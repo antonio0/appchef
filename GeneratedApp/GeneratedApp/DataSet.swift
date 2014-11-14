@@ -10,4 +10,33 @@ import Foundation
 
 class DataSet {
     
+    var _callback: ((String) -> Void)?
+    
+    var _keys: [String] = []
+    
+    var data: [[String: String]] = []
+    
+    init (id: Int, name: String, API: String, keys: [String]) {
+        _keys = keys
+    }
+    
+    init (id: Int, name: String, keys: [String]) {
+        _keys = keys
+    }
+    
+    func add (row: [String: String]) {
+        data.append(row)
+        if _callback != nil {
+            _callback!("")
+        }
+    }
+    
+    func subscribe(callback: (String) -> Void) {
+        self._callback = callback
+    }
+    
+    func numItems() -> Int {
+        return data.count
+    }
+    
 }
