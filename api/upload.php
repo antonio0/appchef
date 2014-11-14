@@ -7,7 +7,7 @@ $author = $_GET["author"];
 // json description of the app as post
 $json = $_POST("jsonapp");
 
-$userpath = "user-$author";
+$userpath = "projects/user-$author";
 if (!file_exists($userpath))
   mkdir($userpath, 0777, true);
 
@@ -22,6 +22,6 @@ fclose($jsonfile);
 
 echo exec("./jsonTest $jsonfile $apppath/jessies.txt");
 
-exec("python test.php")
+exec("python ../xcProjGenerator/genXCproj.py")
 
 ?>
