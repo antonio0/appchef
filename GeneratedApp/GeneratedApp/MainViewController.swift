@@ -35,7 +35,8 @@ class ViewController: UIViewController {
         Pages!.create(0)
         Pages!.create(1)
         
-        
+       // Pages!.getPage(1)!.Elements!.addStaticLabel("sdfsdf")
+
         DataSets!.create(0, name: "items", API: "https://hcssdmkprq.localtunnel.me", keys: [ "sku", "name", "color", "detail", "price", "brand"] )
         DataSets!.create(1, name: "basket", keys: [ "aasd", "asdasd"] )
         

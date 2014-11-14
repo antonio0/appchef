@@ -30,13 +30,6 @@ class PageViewController: UIViewController {
     }
     
     
-    func addLabel(id: Int, text: String) {
-        
-    }
-    
-    func addLabel(id: Int, textSoure: String) {
-        
-    }
     
     
     
@@ -46,7 +39,6 @@ class PageViewController: UIViewController {
         
         let dataSource = appDelegate!.DataSets?.getDataSet(source)
         newList.setDataSet(dataSource!)
-        
         
         newList.view.center = self.view.center;
         

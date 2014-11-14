@@ -41,10 +41,16 @@ class PagesCollection {
         
         let page = getPage(id)
         
+        // sorry for bad variable naming...
+        for apage in _pages.values {
+            apage.view.hidden = true
+        }
+        
         if page != nil {
         
+            page!.view.hidden = false
             mainViewController.view.bringSubviewToFront(page!.view)
-        
+            
         }
         
     }
