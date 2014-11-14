@@ -54,23 +54,52 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
     var dragging = false
     var start: CGPoint?
 
+    
+    
+    func getCell(point: CGPoint) -> UITableViewCell? {
+        
+        for cell in self.tableView.visibleCells() as [UITableViewCell] {
+            if (CGRectContainsPoint(cell.frame, point)) {
+                return cell
+            }
+        }
+        return nil
+    }
+    
     func panGestureDetected(recognizer:UIPanGestureRecognizer) {
         println("pan")
         let translation = recognizer.translationInView(self.view)
         
         if dragging == false {
-            start = recognizer.locationInView(mainVC!.view)
+            
+            var cell = getCell(recognizer.locationInView(self.view))
+            if cell != nil {
+                start = cell!.center
+                
+                start = CGPoint(x: start!.x + (mainVC!.view.bounds.width - 150), y: start!.y + 60 )
+                dragging = true
+            }
+            
+//            if (CGRectContainsPoint(label.frame, start) {
+//                println("it touching thing")
+//                startWiggle()
+//            } else {
+//                if wiggle {
+//                    stopWiggle()
+//                }
+//            }
+            
+            //start = recognizer.locationInView(mainVC!.view)
             println("set start to \(start)")
-        }
-        
-        dragging = true
-        
-        if(recognizer.state == .Ended) {
-            dragging = false
-
-            endMoveLine(recognizer.locationInView(mainVC!.view))
         } else {
-            moveLine(recognizer.locationInView(mainVC!.view))
+            
+            if(recognizer.state == .Ended) {
+                dragging = false
+
+                endMoveLine(recognizer.locationInView(mainVC!.view))
+            } else {
+                moveLine(recognizer.locationInView(mainVC!.view))
+            }
         }
     }
     
