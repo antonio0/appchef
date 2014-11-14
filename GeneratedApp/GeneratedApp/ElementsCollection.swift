@@ -71,27 +71,54 @@ class ElementsCollection {
         
     }
     
-    func addDynamicLabel(id: Int, text: String) {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 23))
-        _elements[id] = ["type" : "UILabel", "source": text, "UILabel": label]
+    func addDynamicLabel(id: Int, key: String, size: CGRect) {
+        var label = UILabel(frame: size)
+        _elements[id] = ["type" : "UILabel", "source": key, "UILabel": label]
     }
 
-    func addStaticLabel(id: Int, text: String) {
-        var label = UILabel(frame: CGRect(x: 0, y: 80, width: 100, height: 23))
+    func addDynamicImage(id: Int, key: String, size: CGRect) {
+        var img = UIImageView(frame: size)
+        _elements[id] = ["type" : "UIImageView", "source": key, "UIImageView": img]
+    }
+    
+    func addStaticLabel(id: Int, text: String, size: CGRect) {
+        var label = UILabel(frame: size)
         label.text = text
+        label.tag = id
         _view!.addSubview(label)
         _elements[id] = ["type" : "UILabel", "text": text, "UILabel": label]
     }
 
-    func addDynamicButton(id: Int, text: String) {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 23))
-        _elements[id] = ["source": text, "UILabel": label]
+    func addStaticImage(id: Int, url: String, size: CGRect) {
+        
+        var img = UIImageView(frame: size)
+//        
+        Image.download(NSURL(string: url)!, {image,
+            error in
+            img.image = image
+        })
+        
+        _view!.addSubview(img)
+        _elements[id] = ["type" : "UIImageView", "url": url, "UIImageView": img]
     }
     
-    func addStaticButton(text: String) {
+    func addDynamicButton(id: Int, key: String) {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 23))
-        label.text = text
-        _view!.addSubview(label)
+        _elements[id] = ["source": key, "UILabel": label]
+    }
+    
+    
+    func addStaticButton(id: Int, text: String, size: CGRect) {
+        var button = UIButton(frame: size)
+        button.setTitle(text, forState: .Normal)
+        button.backgroundColor = UIColor.redColor()
+        button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+
+        if _view != nil {
+            println("ADDING")
+            _view!.addSubview(button)
+        }
+        _elements[id] = ["type" : "UIButton", "text": text, "UIButton": button]
     }
     
     

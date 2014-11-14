@@ -15,7 +15,7 @@
 		4D846D5A1A158B72002FE10D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D846D591A158B72002FE10D /* SwiftyJSON.swift */; };
 		4D846D5C1A159313002FE10D /* ElementsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D846D5B1A159313002FE10D /* ElementsCollection.swift */; };
 		4D846D5E1A159BD2002FE10D /* ListsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D846D5D1A159BD2002FE10D /* ListsCollection.swift */; };
-		4D846D691A15A16E002FE10D /* StaticElementsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D846D681A15A16E002FE10D /* StaticElementsCollection.swift */; };
+		4D846D6C1A15C448002FE10D /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D846D6B1A15C448002FE10D /* Image.swift */; };
 		4DEC88F71A156B580052B935 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC88F61A156B580052B935 /* AppDelegate.swift */; };
 		4DEC88FA1A156B580052B935 /* GeneratedApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC88F81A156B580052B935 /* GeneratedApp.xcdatamodeld */; };
 		4DEC88FC1A156B580052B935 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC88FB1A156B580052B935 /* MainViewController.swift */; };
@@ -73,7 +73,7 @@
 		4D846D591A158B72002FE10D /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		4D846D5B1A159313002FE10D /* ElementsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementsCollection.swift; sourceTree = "<group>"; };
 		4D846D5D1A159BD2002FE10D /* ListsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsCollection.swift; sourceTree = "<group>"; };
-		4D846D681A15A16E002FE10D /* StaticElementsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticElementsCollection.swift; sourceTree = "<group>"; };
+		4D846D6B1A15C448002FE10D /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		4DEC88F11A156B580052B935 /* GeneratedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeneratedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DEC88F51A156B580052B935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DEC88F61A156B580052B935 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,7 +102,6 @@
 			children = (
 				4D846D5D1A159BD2002FE10D /* ListsCollection.swift */,
 				4D846D5B1A159313002FE10D /* ElementsCollection.swift */,
-				4D846D681A15A16E002FE10D /* StaticElementsCollection.swift */,
 				4DEC89191A156B7F0052B935 /* PagesCollection.swift */,
 				4D846D451A157173002FE10D /* DataSetCollection.swift */,
 			);
@@ -115,6 +114,7 @@
 				4D846D431A15716B002FE10D /* DataSet.swift */,
 				4D846D561A15898D002FE10D /* ExternalAPI.swift */,
 				4D846D411A157123002FE10D /* ListViewController.swift */,
+				4D846D6B1A15C448002FE10D /* Image.swift */,
 				4DEC891B1A156B910052B935 /* PagesViewController.swift */,
 			);
 			name = Classes;
@@ -268,11 +268,11 @@
 			files = (
 				4D846D571A15898D002FE10D /* ExternalAPI.swift in Sources */,
 				4DEC891A1A156B7F0052B935 /* PagesCollection.swift in Sources */,
-				4D846D691A15A16E002FE10D /* StaticElementsCollection.swift in Sources */,
 				4DEC88FC1A156B580052B935 /* MainViewController.swift in Sources */,
 				4D846D5E1A159BD2002FE10D /* ListsCollection.swift in Sources */,
 				4D846D5C1A159313002FE10D /* ElementsCollection.swift in Sources */,
 				4D846D5A1A158B72002FE10D /* SwiftyJSON.swift in Sources */,
+				4D846D6C1A15C448002FE10D /* Image.swift in Sources */,
 				4DEC891C1A156B910052B935 /* PagesViewController.swift in Sources */,
 				4DEC88F71A156B580052B935 /* AppDelegate.swift in Sources */,
 				4DEC88FA1A156B580052B935 /* GeneratedApp.xcdatamodeld in Sources */,

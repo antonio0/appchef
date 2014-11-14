@@ -10,6 +10,9 @@ import UIKit
 
 class PageViewController: UIViewController {
     
+    
+//    var _itemsToAdd = [Int: [String: Int]]()
+
     var _id = -1
    
     var mainViewController: UIViewController?
@@ -39,7 +42,6 @@ class PageViewController: UIViewController {
         let elementDict = Elements!.getElement(elementId)
         
         if elementDict == nil {
-            
             return
         }
         
@@ -77,6 +79,34 @@ class PageViewController: UIViewController {
     }
     
     
+    
+//    func addAction(id: Int, addToDataSet: Int, itemsToAdd: [String: Int]) {
+//        let elementDict = Elements!.getElement(id)
+//        if elementDict == nil {
+//            return
+//        }
+//        
+//        let type = elementDict!["type"] as String
+//        var element: AnyObject? = elementDict![type]
+//        
+//        switch (type) {
+//            case "UIButton":
+//                var btn = element as UIButton
+//                btn.tag = addToDataSet
+//                _itemsToAdd[id] = itemsToAdd
+//                btn.addTarget(self, action: "buttonClicked:", forControlEvents: .TouchUpInside)
+//
+//            default:
+//                1+1
+//     
+//        }
+//    }
+    
+    func buttonClicked (sender: UIButton) {
+        let buttonClickedTag = sender.tag
+        println("clicked")
+    }
+
     
     
     override func didReceiveMemoryWarning() {

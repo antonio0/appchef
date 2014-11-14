@@ -20,6 +20,42 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
     }
     
     
+    var clickActions = [Int: [String: Int]]()
+
+    
+    func addAction(id: Int, addToDataSet: Int, itemsToAdd: [String: Int]) {
+        
+        var bugitemsToAdd = itemsToAdd
+        
+        println("doing this shizzlef for \(id)")
+        let elementDict = Elements.getElement(id)
+        if elementDict == nil {
+            return
+        }
+        
+        let type = elementDict!["type"] as String
+        var element: AnyObject? = elementDict![type]
+        
+        switch (type) {
+        case "UIButton":
+            var btn = element as UIButton
+//            btn.tag = addToDataSet
+            println("sadadasdasd this shizzlef for \(id)")
+            bugitemsToAdd.updateValue(addToDataSet, forKey: "addToDataSet")
+            clickActions[id] = bugitemsToAdd
+            
+            
+//            btn.addTarget(self, action: "buttonClicked:", forControlEvents: .TouchUpInside)
+            
+        default:
+            1+1
+            
+        }
+        
+        self.tableView.reloadData()
+        
+    }
+    
     func setDataSet(dataSet: DataSet) {
         _dataSet = dataSet
         _dataSet!.subscribe({ (thing) -> Void in
@@ -57,13 +93,32 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
     //    override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath?) -> UITableViewCell? {
     //        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
     //
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 120.0
+    }
+    
+    
+    func elTouched(sender: AnyObject?) {
+        println("touched \(sender!.tag)")
+        
+        var actions = clickActions[sender!.tag]
+        println(actions)
+        
+        let clickedView = sender!.superview!!.viewWithTag(234) as UILabel
+        
+        
+        
+        println(clickedView.text)
+        
+    }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell:UITableViewCell? = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell?
         
         if (cell == nil) {
             cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
-        }
+        
 
         let row = _dataSet!.getRow(indexPath.row)
         
@@ -71,7 +126,8 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
         
         var idcount = 0;
         
-        for Obj in Elements.getElements() {
+        for key in Elements._elements.keys {
+            let Obj = Elements._elements[key]!
             
             
             var type = Obj["type"] as String?
@@ -92,16 +148,54 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
                     }
                     
                     element = element as UILabel
-                    CellElements.addStaticLabel(idcount, text: row![dataKey!]!)
+                    CellElements.addStaticLabel(key, text: row![dataKey!]!, size: element!.frame)
                     println("adding \(row![dataKey!]!)")
+                
+                case "UIImageView":
+                    
+                    var dataKey = Obj["source"] as String?
+                    
+                    if dataKey == nil {
+                        continue
+                    }
+                    
+                    element = element as UIImageView
+                    CellElements.addStaticImage(idcount, url: row![dataKey!]!, size: element!.frame)
+                    println("adding \(row![dataKey!]!)")
+
+                case "UIButton":
+                    
+                    var dataText = Obj["text"] as String?
+                    element = element as UIButton
+                    println(Obj["text"])
+                    if dataText != nil {
+                        println("adding \(dataText!)")
+                        CellElements.addStaticButton(idcount, text: dataText!, size: element!.frame)
+                    }
+                
                 default:
                 1+1
             }
+            
+            let potentialAction = clickActions[key]
+            
+            if potentialAction != nil {
+                println("action found")
+                println("Adding clicky to \(idcount)")
+                let elm = CellElements.getElement(idcount)
+                let type = elm!["type"] as String?
+                var element = elm![type!]! as UIButton
+                element.tag = key
+                element.addTarget(self, action: "elTouched:", forControlEvents: .TouchUpInside)
+            }
+            
+            
+            
             idcount = idcount + 1;
             
         }
         
-        
+        }
         //cell!.textLabel.text = row!["name"]
         cell!.selectionStyle = .None
         return cell!
