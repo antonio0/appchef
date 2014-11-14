@@ -18,6 +18,11 @@ class MainEditViewController: UIViewController {
     var pagesCollection : PagesCollection?
     var dataSetsCollection: DataSetsCollection?
 
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,10 +108,11 @@ class MainEditViewController: UIViewController {
         
 //        let rightSideBar      = RightSideViewController(nibName: "RightSideBarViewController", bundle: nil)
         let rightSideBar = RightSideViewController();
+        rightSideBar.setDelegate(self)
         rightSideBar.view.frame         = CGRect(x: self.view.frame.size.width, y: 0, width: 150, height: self.view.frame.height)
         
-        rightSideBar.dataSetsCollection = self.dataSetsCollection
-        rightSideBar.tableView.frame    = CGRect(x: UIScreen.mainScreen().bounds.width - 150, y: 40, width: 150, height: self.view.frame.width)
+//        rightSideBar.dataSetsCollection = self.dataSetsCollection
+        rightSideBar.view.frame    = CGRect(x: UIScreen.mainScreen().bounds.width - 150, y: 0, width: 150, height: self.view.frame.height)
         rightSideBar.view.tag = EditViewTags.LeftSideBar.rawValue
         self.addChildViewController(rightSideBar)
         self.rightSideBar  = rightSideBar
@@ -243,5 +249,16 @@ class MainEditViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        recurseView(self.view);
+    }
+    
+    func recurseView(view: UIView) {
+        for subview in view.subviews {
+            self.recurseView(subview as UIView);
+        }
+        view.resignFirstResponder();
+    }
 
 }
