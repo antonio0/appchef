@@ -11,7 +11,7 @@ import UIKit
 
 class Page {
     
-    var elememnts : [Element] = []
+    var elements : [Element] = []
     var screenshot : UIImage?
     var view : UIView
     
@@ -33,8 +33,17 @@ class Page {
     
     func addElement(uiViewElementToBeAdded: UIView) {
         let element = Element(uiElement: uiViewElementToBeAdded)
-        self.elememnts.append(element)
+        self.elements.append(element)
         self.view.addSubview(uiViewElementToBeAdded)
+    }
+    
+    func getElement (point: CGPoint) -> UIView? {
+        for element in self.elements {
+            if CGRectContainsPoint(element.uiElement.frame, point) {
+                return element.uiElement
+            }
+        }
+        return nil
     }
     
     func toJSON() -> NSString {
