@@ -13,6 +13,8 @@ class Element {
     var uiElement : UIView
     var type:  String
     
+    var dataSet: DataSet?
+    
     init(uiElement: UIView, type: String) {
         self.uiElement = uiElement
         self.type      = type
