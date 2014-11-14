@@ -14,8 +14,12 @@ class Page {
     var elements : [Element] = []
     var screenshot : UIImage?
     var view : UIView
-    
+    var id : Int
     init() {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.id = appDelegate.newID()
+        
         self.view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height))
         self.view.backgroundColor = UIColor.whiteColor()
         self.updateScreenshot()
@@ -118,7 +122,7 @@ class Page {
     
     func toDictionary() -> [String: AnyObject] {
         var dictionary = [String: AnyObject]()
-        dictionary["id"] = 0;
+        dictionary["id"] = self.id;
         
         var elementsArray = [AnyObject]()
         

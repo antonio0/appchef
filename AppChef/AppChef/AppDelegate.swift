@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var dataSetsCollection: DataSetsCollection?
     var bindings: Bindings?
     
+    var playViewController: PlayViewController?
+
     var counter = 0
     
     func newID () -> Int {
@@ -28,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.pagesCollection    = PagesCollection()
         self.dataSetsCollection = DataSetsCollection()
+        self.playViewController = PlayViewController()
         self.bindings = Bindings()
         
         // Override point for customization after application launch.
