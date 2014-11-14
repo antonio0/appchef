@@ -36,6 +36,8 @@ class Page {
     }
     
     
+    
+    
     func addElement(uiViewElementToBeAdded: UIView, type: String, point: CGPoint) -> Element{
         
         var newElement = self.createElement(uiViewElementToBeAdded, type: type)

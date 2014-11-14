@@ -47,13 +47,10 @@ class EditElement: UIViewController {
         
         let appDelegate        = UIApplication.sharedApplication().delegate as AppDelegate
         let pagesCollection    = appDelegate.pagesCollection!;
+//        let pagesCollection    = appDelegate.pagesCollection!;
         var count = 0
         
-        for _pages in pagesCollection.pages {
-            self.pages.append(count + 4)
-            count = count+1
-        }
-        
+        pages = pagesCollection.pageIds
         // Do any additional setup after loading the view.
     }
 
@@ -79,6 +76,14 @@ class EditElement: UIViewController {
         }
         
         _delegate!.closeModal()
+        
+        if pageLinkVal.text!.toInt() != 0 {
+            var pageid: Int = pages[pageLinkVal.text!.toInt()!]
+            //fuck you swift
+            elementEditing!.addAction( pageid
+            )
+        }
+        
         
     }
     

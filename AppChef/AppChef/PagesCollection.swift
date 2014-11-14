@@ -13,6 +13,7 @@ class PagesCollection {
     var pages : [Page] = []
     var activePage : Page?
 
+    var pageIds: [Int] = []
     
     init() {
         self.activePage = self.addPage()
@@ -20,6 +21,7 @@ class PagesCollection {
     
     func addPage() -> Page {
         let newPage = Page()
+        pageIds.append(newPage.id)
         self.pages.append(newPage)
         return newPage
     }

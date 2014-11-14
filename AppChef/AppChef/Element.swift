@@ -15,7 +15,7 @@ class Element {
     var type:  String
     var cellElements: [Element] = []
     var source : Int?
-    
+    var pageLink: Int?
     var indexInPage: Int?
 
     var appDelegate: AppDelegate
@@ -28,6 +28,17 @@ class Element {
         self.type      = type
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         bindings = appDelegate.bindings!
+    }
+    
+    func addAction(goToPage: Int) {
+        self.pageLink = goToPage
+        
+        
+        var onClickAction = [String: AnyObject]()
+        onClickAction["action"] = "link"
+        onClickAction["page"] = goToPage
+        
+        self.actions["onClick"] = onClickAction
 
     }
     
@@ -53,6 +64,8 @@ class Element {
         self.actions["onClick"] = onClickAction
         
     }
+    
+    
     
     func elementToDictionary(element:Element) -> [String: AnyObject] {
         var dictionary = [String: AnyObject]()
