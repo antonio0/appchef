@@ -71,7 +71,10 @@ class ViewController: UIViewController {
         
         Pages!.showPage(0)
 
-        
+        Pages!.getPage(1)!.addList(11, source: 1, size: CGRect(x: 0, y: 65, width: self.view.bounds.width, height: self.view.bounds.height - 65))
+        Lists!.getList(11)!.Elements.addDynamicLabel(500, key: "name", size: CGRect(x: 120, y: 10, width: 400, height: 23))
+        Lists!.getList(11)!.Elements.addDynamicLabel(501, key: "price", size: CGRect(x: 120, y: 40, width: 400, height: 23))
+
         
         
         //Pages!.getPage(0).addLabel(id, type)

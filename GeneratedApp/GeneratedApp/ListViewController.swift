@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class ListViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+    var appDelegate: AppDelegate?
 
     var _dataSet: DataSet?
     
@@ -17,6 +18,9 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
+
     }
     
     
@@ -103,13 +107,30 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
         println("touched \(sender!.tag)")
         
         var actions = clickActions[sender!.tag]
+        var modelIdToAdd = actions!["addToDataSet"]
         println(actions)
         
-        let clickedView = sender!.superview!!.viewWithTag(234) as UILabel
+        var row: [String: String] = [:]
         
+        for target in actions!.keys {
+            if target == "addToDataSet" {
+                continue
+            }
         
+            var targetElm = sender!.superview!!.viewWithTag(actions![target]!)
+            
+            if targetElm is UILabel {
+                var labelToAdd = targetElm as UILabel
+                row[target] = labelToAdd.text
+            }
+            
+            
+        }
         
-        println(clickedView.text)
+        var modelToAdd = appDelegate!.DataSets!.getDataSet(modelIdToAdd!)
+        modelToAdd!.add(row)
+        
+        println(row)
         
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
