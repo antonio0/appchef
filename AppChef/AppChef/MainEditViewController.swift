@@ -17,6 +17,9 @@ enum SideBarShowing: Int {
 class MainEditViewController: UIViewController
 {
     
+    var editElement = EditElement(nibName: "EditElement", bundle: nil)
+
+    
     var pagesManager : PagesManagerViewController?
     var addElements  : AddElementsViewController?
     var leftSideBar  : LeftSideBarViewController?

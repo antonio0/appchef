@@ -28,6 +28,10 @@ class DataSetsCollection : NSObject {
         return [DataSet](datasets.values)
     }
     
+    func getDataSet(id: Int) -> DataSet? {
+        return datasets[id]
+    }
+    
     func toJSON() {
         
     }

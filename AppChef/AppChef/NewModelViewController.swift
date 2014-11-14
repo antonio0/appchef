@@ -113,7 +113,7 @@ class NewModelViewController: UIViewController, UITextFieldDelegate {
         }, completion: nil)
         
         _delegate!.dataSetsViewController.tableView.reloadData()
-    
+        initialiseView()
     }
     
     

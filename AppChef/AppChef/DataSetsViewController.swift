@@ -215,8 +215,24 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
     }
     
     func bindElementToModel(element: Element, dataSet: DataSet) {
+    
+        bindElementModelController.currDataSource = dataSet.id
+        bindElementModelController.currElement = element.id
         
+        bindElementModelController.view.frame = CGRect(x: 0, y: mainVC!.view.bounds.height - 500, width: mainVC!.view.bounds.width, height: 500)
+        //        newModelController.view.center = self.view.superview!.center
+       
+        self.view.superview!.superview!.addSubview(bindElementModelController.view)
+        self.view.superview!.superview!.bringSubviewToFront(bindElementModelController.view)
+
+        bindElementModelController.view.frame.origin.y = mainVC!.view.bounds.height + 500
+
+        UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+            self.bindElementModelController.view.frame.origin.y = self.view.superview!.superview!.bounds.height - 500
+
+            }, completion: nil)
     }
 
+    var bindElementModelController = BindElementModelController(nibName: "BindElementModelController", bundle: nil)
 
 }

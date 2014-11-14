@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -8,8 +8,9 @@
             <connections>
                 <outlet property="addToDSView" destination="XLK-bo-RgJ" id="OBl-wq-tkK"/>
                 <outlet property="allBindings" destination="6sh-xt-vPC" id="twt-IC-kVu"/>
-                <outlet property="createAddAction" destination="ZkH-nA-2Oe" id="GOI-IT-9Jy"/>
+                <outlet property="picker" destination="pNG-Rk-6YG" id="R4O-h7-Dya"/>
                 <outlet property="selectAction" destination="XIC-SS-hLq" id="cYI-CT-Zgm"/>
+                <outlet property="setAsSourceView" destination="HJc-fQ-sOH" id="5O3-20-TD1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="QFE-Vf-h00"/>
             </connections>
         </placeholder>
@@ -37,6 +38,9 @@
                         <segment title="Set as Source"/>
                         <segment title="Set as Display"/>
                     </segments>
+                    <connections>
+                        <action selector="viewChanged:" destination="-1" eventType="valueChanged" id="bqu-9V-Mc9"/>
+                    </connections>
                 </segmentedControl>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Actions:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-sR-vf5">
                     <rect key="frame" x="13" y="62" width="63" height="21"/>
@@ -66,6 +70,30 @@
                             </state>
                             <connections>
                                 <action selector="createAddAction:" destination="-1" eventType="touchUpInside" id="1m4-IR-8Mm"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJc-fQ-sOH">
+                    <rect key="frame" x="13" y="251" width="389" height="212"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set which key you want this value to be added against:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-kI-0E1">
+                            <rect key="frame" x="8" y="-5" width="355" height="59"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-Rk-6YG">
+                            <rect key="frame" x="13" y="30" width="363" height="162"/>
+                        </pickerView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prf-yU-hmW">
+                            <rect key="frame" x="151" y="178" width="88" height="30"/>
+                            <state key="normal" title="Add Element">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="addElementBinding:" destination="-1" eventType="touchUpInside" id="sFO-5m-AMz"/>
                             </connections>
                         </button>
                     </subviews>
