@@ -28,6 +28,10 @@ class ViewController: UIViewController {
         play()
 
     }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
     
     
     func play () {
@@ -35,7 +39,10 @@ class ViewController: UIViewController {
         Pages!.create(0)
         Pages!.create(1)
 
-        
+        Pages!.getPage(0)!.Elements!.addNavBar(10, text: "Shopping List")
+        Pages!.getPage(0)!.Elements!.addNavBarButton(20, text: "Basket", place: .Right)
+        Pages!.getPage(0)!.addAction(20, navigateTo: 1)
+
         Pages!.getPage(1)!.Elements!.addNavBar(0, text: "Basket")
         Pages!.getPage(1)!.Elements!.addNavBarButton(1, text: "Back to Shop", place: .Left)
         Pages!.getPage(1)!.Elements!.addNavBarButton(2, text: "Checkout", place: .Right)
@@ -50,7 +57,7 @@ class ViewController: UIViewController {
         DataSets!.create(1, name: "basket", keys: [ "aasd", "asdasd"] )
         
     
-        Pages!.getPage(0)!.addList(0, source: 0)
+        Pages!.getPage(0)!.addList(0, source: 0, size: CGRect(x: 0, y: 67, width: self.view.bounds.width, height: self.view.bounds.height - 67))
         
         Lists!.getList(0)!.Elements.addDynamicLabel(234, text: "name")
         Lists!.getList(0)!.Elements.addDynamicLabel(324, text: "price")

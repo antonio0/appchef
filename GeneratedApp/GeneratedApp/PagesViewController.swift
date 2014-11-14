@@ -65,14 +65,14 @@ class PageViewController: UIViewController {
         appDelegate!.Pages!.showPage(sender.tag)
     }
     
-    func addList(id: Int, source: Int) {
+    func addList(id: Int, source: Int, size: CGRect) {
         
-        var newList = appDelegate!.Lists!.create(id, viewController: self, source: source)
+        var newList = appDelegate!.Lists!.create(id, viewController: self, source: source, size: size)
         
         let dataSource = appDelegate!.DataSets?.getDataSet(source)
         newList.setDataSet(dataSource!)
         
-        newList.view.center = self.view.center;
+//        newList.view.center = self.view.center;
         
     }
     
