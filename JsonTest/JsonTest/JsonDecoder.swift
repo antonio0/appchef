@@ -232,7 +232,7 @@ class JsonDecoder {
         let name = jsonDataset["name"]
         let link = jsonDataset["link"]
         let keys = jsonDataset["keys"].arrayValue!
-        var command = "Datasets!.create(id: \(datasetId), name: \"\(name)\", API:\"\(link)\", keys: ["
+        var command = "Datasets!.create(\(datasetId), name: \"\(name)\", API:\"\(link)\", keys: ["
         if keys.count > 0 {
             command = "\(command)\"\(keys[0])\""
         }
@@ -248,7 +248,7 @@ class JsonDecoder {
         let datasetId = jsonDataset["id"]
         let name = jsonDataset["name"]
         let keys = jsonDataset["keys"].arrayValue!
-        var command = "Datasets!.create(id: \(datasetId), name: \"\(name)\", keys: ["
+        var command = "Datasets!.create(\(datasetId), name: \"\(name)\", keys: ["
         if keys.count > 0 {
             command = "\(command)\"\(keys[0])\""
         }
