@@ -26,23 +26,44 @@ class PageViewController: UIViewController {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
         mainViewController = appDelegate!.mainViewController
-        
-//        var bar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 64))
-//        var item = UINavigationItem(title: "main")
-//        self.view.addSubview(bar)
-//
-//        bar.pushNavigationItem(item, animated: false)
-//
-//        var next = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "test")
-//        item.rightBarButtonItem = next
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    
     
     func test () {
         println("clicked")
     }
     
+    func addAction(elementId: Int, navigateTo: Int) {
+        let elementDict = Elements!.getElement(elementId)
+        
+        if elementDict == nil {
+            
+            return
+        }
+        
+        let type = elementDict!["type"] as String
+        
+        var element: AnyObject? = elementDict![type]
+        
+        switch (type) {
+            case "UIBarButtonItem":
+                var castedelement = element as UIBarButtonItem
+                castedelement.tag = navigateTo
+                castedelement.action = "navigateToPage:"
+//                castedelement.addTarget!(target: self, action: "navigateToPage:", forControlEvents: UIControlEvents.TouchUpInside)
+
+            default:
+                1+1
+        }
+        
+        
+    }
     
+    func navigateToPage(sender: UIBarButtonItem) {
+        appDelegate!.Pages!.showPage(sender.tag)
+    }
     
     func addList(id: Int, source: Int) {
         

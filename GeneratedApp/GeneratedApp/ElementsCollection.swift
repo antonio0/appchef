@@ -43,26 +43,31 @@ class ElementsCollection {
         
         var bar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: _view!.bounds.width, height: 64))
         _view!.addSubview(bar)
-        _navbaritem = UINavigationItem(title: "main")
+        _navbaritem = UINavigationItem(title: text)
         bar.pushNavigationItem(_navbaritem!, animated: false)
 
         _elements[id] = ["type": "UINavigationBar", "UINavigationBar": bar]
     }
     
     
-    func addNavBarButton (text: String, place: Place) {
+    func addNavBarButton (id: Int, text: String, place: Place) {
         if _viewController == nil {
             return
         }
         
+        var btn: UIBarButtonItem?
+        
         if (place == .Right) {
-            var next = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: _viewController!, action: "test")
-            _navbaritem!.rightBarButtonItem = next
+            btn = UIBarButtonItem(title: text, style: UIBarButtonItemStyle.Plain, target: _viewController!, action: nil)
+            _navbaritem!.rightBarButtonItem = btn
+            
+            
         } else {
-            var next = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: _viewController!, action: "test")
-            _navbaritem!.leftBarButtonItem = next
+            btn = UIBarButtonItem(title: text, style: UIBarButtonItemStyle.Plain, target: _viewController!, action: nil)
+            _navbaritem!.leftBarButtonItem = btn
         }
-//        _elements.append(["type": "UINavigationBar", "UINavigationBar": bar])
+        
+        _elements[id] = ["type": "UIBarButtonItem", "UIBarButtonItem": btn!]
         
     }
     
@@ -90,6 +95,9 @@ class ElementsCollection {
     }
     
     
+    func getElement (id: Int) -> [String: AnyObject]? {
+        return _elements[id]
+    }
     
     func getElements () -> [[String: AnyObject]] {
         

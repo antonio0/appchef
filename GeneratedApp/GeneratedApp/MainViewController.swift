@@ -37,8 +37,12 @@ class ViewController: UIViewController {
 
         
         Pages!.getPage(1)!.Elements!.addNavBar(0, text: "Basket")
-        Pages!.getPage(1)!.Elements!.addNavBarButton("left", place: .Left)
-        Pages!.getPage(1)!.Elements!.addNavBarButton("left", place: .Right)
+        Pages!.getPage(1)!.Elements!.addNavBarButton(1, text: "Back to Shop", place: .Left)
+        Pages!.getPage(1)!.Elements!.addNavBarButton(2, text: "Checkout", place: .Right)
+        
+        Pages!.getPage(1)!.addAction(1, navigateTo: 0)
+        
+//        Pages!.getPage(1)!.Elements!.getElement(1).addAction()
         
         Pages!.getPage(1)!.Elements!.addStaticLabel(22, text: "sdfsdf")
 

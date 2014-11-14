@@ -103,7 +103,7 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
         
         
         //cell!.textLabel.text = row!["name"]
-        
+        cell!.selectionStyle = .None
         return cell!
     }
     
