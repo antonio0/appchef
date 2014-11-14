@@ -15,9 +15,12 @@ class Element {
     var type:  String
     var cellElements: [Element] = []
     var source : Int?
-    var dataSet: DataSet?
+    
+    var indexInPage: Int?
+
     var appDelegate: AppDelegate
     var bindings: Bindings
+    var actions: [String:AnyObject] = [:]
     
     init(uiElement: UIView, type: String, id: Int) {
         self.id        = id
@@ -47,6 +50,7 @@ class Element {
         }
         
         onClickAction["itemsToAdd"] = itemsToAdd
+        self.actions["onClick"] = onClickAction
         
     }
     
@@ -85,6 +89,9 @@ class Element {
         } else if (self.type == "list") {
             dictionary["source"] = element.source
         }
+        
+        dictionary["actions"] = self.actions
+        
         return dictionary;
     }
     
@@ -93,12 +100,12 @@ class Element {
         
         if self.type == "list" {
            
-            var cellElements: [AnyObject] = []
-            for element in cellElements {
-                cellElements.append(self.elementToDictionary(element as Element))
+            var c2: [AnyObject] = []
+            for element in self.cellElements {
+                c2.append(self.elementToDictionary(element as Element))
             }
             
-            dictionary["cell"] = cellElements
+            dictionary["cell"] = c2
         }
         
         return dictionary

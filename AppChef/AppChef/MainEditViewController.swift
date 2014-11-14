@@ -83,12 +83,12 @@ class MainEditViewController: UIViewController
     func addGestureRecognizers() {
         let showPagesManagerGesture = UISwipeGestureRecognizer(target: self, action: "showPagesManager:")
         showPagesManagerGesture.direction = UISwipeGestureRecognizerDirection.Up;
-        showPagesManagerGesture.numberOfTouchesRequired = 3;
+        showPagesManagerGesture.numberOfTouchesRequired = 1;
         self.view.addGestureRecognizer(showPagesManagerGesture)
         
         let swipe3FingersDownGesture = UISwipeGestureRecognizer(target: self, action: "swipe3FingersDown:")
         swipe3FingersDownGesture.direction = UISwipeGestureRecognizerDirection.Down
-        swipe3FingersDownGesture.numberOfTouchesRequired = 3
+        swipe3FingersDownGesture.numberOfTouchesRequired = 1
         self.view.addGestureRecognizer(swipe3FingersDownGesture)
         
         swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: "swipeLeft:")

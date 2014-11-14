@@ -9,6 +9,8 @@
                 <outlet property="Label" destination="tyE-DL-PTn" id="5hY-PR-BAo"/>
                 <outlet property="buttonIcon" destination="b5D-BT-pYM" id="ubh-8a-i2v"/>
                 <outlet property="inputFieldIcon" destination="WV9-ga-ZAZ" id="SHD-nj-IqP"/>
+                <outlet property="listIcon" destination="9Hk-lM-ECK" id="Mx9-2X-I59"/>
+                <outlet property="navIcon" destination="ze6-eS-7cw" id="w4j-TD-0aw"/>
                 <outlet property="pictureIcon" destination="ers-09-X7b" id="MDs-gU-2rb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,7 +39,7 @@
                     <rect key="frame" x="223" y="324" width="60" height="60"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="navigator" translatesAutoresizingMaskIntoConstraints="NO" id="ze6-eS-7cw">
-                    <rect key="frame" x="318" y="325" width="60" height="60"/>
+                    <rect key="frame" x="318" y="324" width="60" height="60"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Button" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbl-tE-Gti">
                     <rect key="frame" x="38" y="262" width="52" height="21"/>
