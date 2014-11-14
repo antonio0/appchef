@@ -33,6 +33,7 @@
 		C5DC85C21A156C01008A2C7A /* AddElementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DC85C01A156C01008A2C7A /* AddElementsViewController.swift */; };
 		C5DC85C31A156C01008A2C7A /* AddElementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */; };
 		C5DC85C61A156C61008A2C7A /* ViewTagEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */; };
+		C5FA57DA1A1631D700001ABD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FA57D91A1631D700001ABD /* Helper.swift */; };
 		C5FB9ECC1A15E9DB00975F21 /* DataSetsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		C5DC85C01A156C01008A2C7A /* AddElementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddElementsViewController.swift; sourceTree = "<group>"; };
 		C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddElementsViewController.xib; sourceTree = "<group>"; };
 		C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTagEnumerator.swift; sourceTree = "<group>"; };
+		C5FA57D91A1631D700001ABD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSetsCollection.swift; path = ../DataSetsCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 		C5DC85881A15679B008A2C7A /* AppChef */ = {
 			isa = PBXGroup;
 			children = (
+				C5FA57D81A1631CA00001ABD /* Helper */,
 				C5093C461A15E4DF00B99A6B /* Vendor */,
 				C5AF9E241A15904800F82EAB /* Entity */,
 				C5AF9E221A15902D00F82EAB /* Collection */,
@@ -221,6 +224,14 @@
 				C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */,
 			);
 			name = Enum;
+			sourceTree = "<group>";
+		};
+		C5FA57D81A1631CA00001ABD /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C5FA57D91A1631D700001ABD /* Helper.swift */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +348,7 @@
 				C5DC85B11A1569D5008A2C7A /* WelcomeViewController.swift in Sources */,
 				C5DC85C21A156C01008A2C7A /* AddElementsViewController.swift in Sources */,
 				C5DC858C1A15679B008A2C7A /* AppDelegate.swift in Sources */,
+				C5FA57DA1A1631D700001ABD /* Helper.swift in Sources */,
 				C5DC85B31A1569E5008A2C7A /* MainEditViewController.swift in Sources */,
 				C5AF9E261A15905A00F82EAB /* PagesCollection.swift in Sources */,
 				C5DC85C61A156C61008A2C7A /* ViewTagEnumerator.swift in Sources */,

@@ -200,7 +200,9 @@ class MainEditViewController: UIViewController {
         if let pagesManagerView = self.view.viewWithTag(EditViewTags.PagesManager.rawValue) {
             self.hideUIViewWithAnimationAndRemove(pagesManagerView)
         } else if let addElementsView = self.view.viewWithTag(EditViewTags.AddElements.rawValue) {
-            self.hideUIViewWithAnimationAndRemove(addElementsView)
+            if addElementsView.alpha == 1 {
+                self.hideUIViewWithAnimationAndRemove(addElementsView)
+            }
         } else {
             self.addAndShowUIViewWithAnimation(self.addElements!.view)
         }
