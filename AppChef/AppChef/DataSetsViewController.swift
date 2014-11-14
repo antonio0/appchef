@@ -203,12 +203,14 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
     func endMoveLine(point: CGPoint, dataSet: DataSet) {
         dragging = false;
         start = nil;
-        stopWiggle()
+        if wiggle {
+            stopWiggle()
+        }
         mainVC!.shapeLayer.path = nil;
         
     
         if let foundElement = self.pagesCollection!.activePage?.getElement(point) {
-            bindElementToModel(foundElement, dataSet: dataSet)
+            bindElementToModel(foundElement, dataSet:dataSet)
         }
     }
     

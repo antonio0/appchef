@@ -25,11 +25,7 @@ class DataSetsCollection : NSObject {
     }
     
     func dataSetArray() -> [DataSet] {
-        var dses: [DataSet] = []
-        for (key, value) in datasets {
-            dses.append(value)
-        }
-        return dses
+        return [DataSet](datasets.values)
     }
     
     func toJSON() {

@@ -37,6 +37,9 @@
 		C5DC85C31A156C01008A2C7A /* AddElementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */; };
 		C5DC85C61A156C61008A2C7A /* ViewTagEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */; };
 		C5FA57DA1A1631D700001ABD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FA57D91A1631D700001ABD /* Helper.swift */; };
+		C5FA57DC1A1650C500001ABD /* BindElementModelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5FA57DB1A1650C500001ABD /* BindElementModelController.xib */; };
+		C5FA57DE1A16542700001ABD /* BindElementModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FA57DD1A16542700001ABD /* BindElementModelController.swift */; };
+		C5FA57E01A16551600001ABD /* Bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FA57DF1A16551600001ABD /* Bindings.swift */; };
 		C5FB9ECC1A15E9DB00975F21 /* DataSetsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,9 @@
 		C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddElementsViewController.xib; sourceTree = "<group>"; };
 		C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTagEnumerator.swift; sourceTree = "<group>"; };
 		C5FA57D91A1631D700001ABD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		C5FA57DB1A1650C500001ABD /* BindElementModelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindElementModelController.xib; sourceTree = "<group>"; };
+		C5FA57DD1A16542700001ABD /* BindElementModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindElementModelController.swift; sourceTree = "<group>"; };
+		C5FA57DF1A16551600001ABD /* Bindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bindings.swift; sourceTree = "<group>"; };
 		C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSetsCollection.swift; path = ../DataSetsCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +123,7 @@
 		C5AF9E221A15902D00F82EAB /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				C5FA57DF1A16551600001ABD /* Bindings.swift */,
 				C5AF9E251A15905A00F82EAB /* PagesCollection.swift */,
 				C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */,
 			);
@@ -209,6 +216,7 @@
 				C5093C3E1A15DA7900B99A6B /* EditElementViewController.swift */,
 				C5DC85C01A156C01008A2C7A /* AddElementsViewController.swift */,
 				C5AF9E2B1A1598A700F82EAB /* ElementsTouchController.swift */,
+				C5FA57DD1A16542700001ABD /* BindElementModelController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 		C5DC85AF1A1569BB008A2C7A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C5FA57DB1A1650C500001ABD /* BindElementModelController.xib */,
 				4DE1F6521A15F8000037D349 /* NewModelViewController.xib */,
 				C5DC85921A15679B008A2C7A /* Main.storyboard */,
 				C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */,
@@ -334,6 +343,7 @@
 				C5DC85C31A156C01008A2C7A /* AddElementsViewController.xib in Resources */,
 				C5DC85BF1A156BEA008A2C7A /* PagesManagerViewController.xib in Resources */,
 				4DE1F6531A15F8000037D349 /* NewModelViewController.xib in Resources */,
+				C5FA57DC1A1650C500001ABD /* BindElementModelController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,12 +365,14 @@
 				C5DC85911A15679B008A2C7A /* LoginViewController.swift in Sources */,
 				C5AF9E281A1590CC00F82EAB /* Page.swift in Sources */,
 				C5AF9E2A1A15936A00F82EAB /* Element.swift in Sources */,
+				C5FA57E01A16551600001ABD /* Bindings.swift in Sources */,
 				C5DC85BE1A156BEA008A2C7A /* PagesManagerViewController.swift in Sources */,
 				C5DC85B11A1569D5008A2C7A /* WelcomeViewController.swift in Sources */,
 				C5DC85C21A156C01008A2C7A /* AddElementsViewController.swift in Sources */,
 				C5DC858C1A15679B008A2C7A /* AppDelegate.swift in Sources */,
 				C5FA57DA1A1631D700001ABD /* Helper.swift in Sources */,
 				4DE1F6511A15F05D0037D349 /* DataSetsViewController.swift in Sources */,
+				C5FA57DE1A16542700001ABD /* BindElementModelController.swift in Sources */,
 				4DE1F6551A15F9910037D349 /* NewModelViewController.swift in Sources */,
 				C5DC85B31A1569E5008A2C7A /* MainEditViewController.swift in Sources */,
 				C5AF9E261A15905A00F82EAB /* PagesCollection.swift in Sources */,
