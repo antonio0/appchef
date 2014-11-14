@@ -28,12 +28,12 @@ class MainEditViewController: UIViewController
     var path = UIBezierPath();
     var shapeLayer = CAShapeLayer();
     
+    var overScreenMenu = false;
+    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
-    var label = UILabel(frame: CGRect(x: 40, y: 40, width: 80, height: 80))
-  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,14 +43,10 @@ class MainEditViewController: UIViewController
         
         self.initElementsTouchController()
         
-        
         self.initMenus()
         self.addGestureRecognizers()
   
         self.initPageView()
-        label.backgroundColor = UIColor.greenColor();
-        
-        self.view.addSubview(label)
         
         // Do any additional setup after loading the view.
     }
@@ -113,6 +109,7 @@ class MainEditViewController: UIViewController
     
     func initLeftSideBar() {
 //        let leftSideBar      = LeftSideBarViewController(nibName: "LeftSideBarViewController", bundle: nil)
+
         let leftSideBar = LeftSideBarViewController()
         leftSideBar.tableView.frame = CGRect(x: 0, y: 0, width: 150, height: self.view.frame.height)
         leftSideBar.view.tag = EditViewTags.LeftSideBar.rawValue
@@ -148,19 +145,31 @@ class MainEditViewController: UIViewController
     
     func switchToPage(newPage: Page) {
         
-        let currentPageView = self.view.viewWithTag(EditViewTags.Page.rawValue)
+        let currentPageView = self.view.viewWithTag(EditViewTags.Page.rawValue)?
         let newPageView     = newPage.view;
+        
+        if(newPageView == currentPageView) {
+            return;
+        }
+        
         let newCGRect       = CGRect(x: self.view.frame.width, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
         newPageView.frame = newCGRect
         newPageView.tag = EditViewTags.Page.rawValue
         
-        self.view.insertSubview(newPageView, atIndex: 1)
+        if(currentPageView != nil) {
+            self.view.insertSubview(newPageView, aboveSubview: currentPageView!)
+        } else {
+            self.view.insertSubview(newPageView, atIndex: 0)
+        }
         
         UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: nil, animations: { () -> Void in
             newPageView.frame.origin.x = 0;
         }) { (Bool) -> Void in
-            currentPageView!.removeFromSuperview()
+            if(currentPageView != nil) {
+                currentPageView!.removeFromSuperview()
+            }
+            
             self.pagesCollection!.activePage = newPage
 
         }
@@ -168,12 +177,14 @@ class MainEditViewController: UIViewController
     }
     
     func showPagesManager(gesture: UIGestureRecognizer) {
+        
         let pagesManagerView = self.view.viewWithTag(EditViewTags.PagesManager.rawValue)?
         
         if(pagesManagerView == nil) {
             self.pagesCollection?.activePage?.updateScreenshot()
             self.pagesManager!.updatePagesList()
             self.addAndShowUIViewWithAnimation(self.pagesManager!.view)
+            self.overScreenMenu = true;
         }
         
     }
@@ -184,6 +195,7 @@ class MainEditViewController: UIViewController
             viewToHide.alpha = 0
             }, completion: { (Bool) -> Void in
                 viewToHide.removeFromSuperview();
+           
         })
         
     }
@@ -198,6 +210,7 @@ class MainEditViewController: UIViewController
             viewToAdd.alpha = 1
         })
         
+     
 
     }
     
@@ -221,10 +234,15 @@ class MainEditViewController: UIViewController
         
         if let pagesManagerView = self.view.viewWithTag(EditViewTags.PagesManager.rawValue) {
             self.hideUIViewWithAnimationAndRemove(pagesManagerView)
+               self.overScreenMenu = false
         } else if let addElementsView = self.view.viewWithTag(EditViewTags.AddElements.rawValue) {
-            self.hideUIViewWithAnimationAndRemove(addElementsView)
+            if addElementsView.alpha == 1 {
+                self.hideUIViewWithAnimationAndRemove(addElementsView)
+                self.overScreenMenu = false;
+            }
         } else {
             self.addAndShowUIViewWithAnimation(self.addElements!.view)
+            self.overScreenMenu = true;
         }
     }
     
@@ -248,6 +266,11 @@ class MainEditViewController: UIViewController
 //    }
 
     func swipeLeft(gesture: UIGestureRecognizer) {
+        
+        if(self.overScreenMenu) {
+            return;
+        }
+        
         
         if sideBarShowing == .Left {
             sideBarShowing = .None
@@ -276,6 +299,12 @@ class MainEditViewController: UIViewController
 //        }
 //    }
     func swipeRight(gesture: UIGestureRecognizer) {
+        
+        if(self.overScreenMenu) {
+            return;
+        }
+        
+        
         swipeLeftGesture!.enabled = true
 
         if sideBarShowing == .Right {

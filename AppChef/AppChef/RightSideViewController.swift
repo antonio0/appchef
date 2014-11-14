@@ -120,53 +120,14 @@ class RightSideViewController: UIViewController {
     var path = UIBezierPath();
     var shapeLayer = CAShapeLayer();
     var wiggle = false
+    
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         
-        if dragging == false {
-            return
-        }
-        
-        println("Dragging: \(dragging)")
-        let touch: AnyObject? = touches.anyObject();
-        var end = touch!.locationInView(self.view);
-        
-        path.removeAllPoints();
-        var dx = end.x - start!.x;
-        var dy = end.y - start!.y;
-        path.moveToPoint(start!)
-        path.addLineToPoint(touch!.locationInView(self.view))
-        shapeLayer.path = path.CGPath
-        shapeLayer.strokeColor = UIColor.blackColor().CGColor;
-        shapeLayer.lineWidth = 2;
-        shapeLayer.fillColor = UIColor.clearColor().CGColor;
-        self.view.layer.addSublayer(shapeLayer)
-        //
-        
-        //        if (touch!.view != self.view.superview?.viewWithTag(55)) {
-        //            println("it touching thing")
-        //        } else {
-        //            println("it is not touching")
-        //        }
-        
-        if (CGRectContainsPoint(_delegate!.label.frame, touch!.locationInView(_delegate!.view))) {
-            println("it touching thing")
-            startWiggle()
-        } else {
-            if wiggle {
-                stopWiggle()
-            }
-        }
-        
+     
     }
     
     
-    
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        dragging = false;
-        start = nil;
-        stopWiggle()
-        shapeLayer.path = nil;
-        self.view.layer.addSublayer(shapeLayer)
         
     }
     
@@ -175,25 +136,6 @@ class RightSideViewController: UIViewController {
     }
     
     
-    func startWiggle() {
-        var rightWobble = CGAffineTransformRotate(CGAffineTransformIdentity, radians(5.0));
-        
-        wiggle = true
-        UIView.animateWithDuration(0.18, delay: 0.0, options: (UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.Repeat | UIViewAnimationOptions.Autoreverse), animations: {
-            self._delegate!.label.transform = rightWobble
-            }, completion: nil);
-        
-    }
-    
-    func stopWiggle() {
-        
-        wiggle = false
-        UIView.animateWithDuration(0.18, delay: 0.0, options: (UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.BeginFromCurrentState | UIViewAnimationOptions.CurveLinear), animations: {
-            self._delegate!.label.transform =  CGAffineTransformIdentity
-            }, completion: nil);
-        
-    }
-
     
     
 }

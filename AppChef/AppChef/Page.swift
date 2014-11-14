@@ -31,9 +31,10 @@ class Page {
         self.screenshot = screenshot;
     }
     
-    func addElement(uiViewElementToBeAdded: UIView) {
-        let element = Element(uiElement: uiViewElementToBeAdded)
-        self.elements.append(element)
+    
+    func addElement(uiViewElementToBeAdded: UIView, type: String) {
+        let element = Element(uiElement: uiViewElementToBeAdded, type: type)
+        self.elememnts.append(element)
         self.view.addSubview(uiViewElementToBeAdded)
     }
     
