@@ -11,17 +11,25 @@ import UIKit
 
 class DataSetsCollection : NSObject {
     
-    var datasets : [DataSet] = []
+    var datasets = [Int: DataSet]()
     
     override init() {
         
     }
     
-    func createDataSet(name:String, type: DataSetType) -> DataSet {
-        let newDataSet = DataSet(name: name, type: type)
-        self.datasets.append(newDataSet)
-        
-        return newDataSet
+    func create(name:String, type: ModelType, keys: [String]) {
+        var id =  Int(arc4random_uniform(834752))
+        var newDataSet = DataSet(name: name, type: type, id: id)
+        newDataSet.keys = keys
+        self.datasets[id] = newDataSet
+    }
+    
+    func dataSetArray() -> [DataSet] {
+        return [DataSet](datasets.values)
+    }
+    
+    func getDataSet(id: Int) -> DataSet? {
+        return datasets[id]
     }
     
     func toJSON() {

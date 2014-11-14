@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        Parse.setApplicationId("T3H7seI5xKXazNt45ftBQ6hakcL5tu2de8BJPHXv", clientKey: "K0EtNnUbTqZN3RMgSlQODJ2gzy1ndMwLYElgV4vZ");
         mainViewController = self.window!.rootViewController
         Pages = PagesCollection()
         DataSets = DataSetsCollection()

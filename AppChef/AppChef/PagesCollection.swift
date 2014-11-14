@@ -12,6 +12,7 @@ class PagesCollection {
     
     var pages : [Page] = []
     var activePage : Page?
+
     
     init() {
         self.activePage = self.addPage()
@@ -23,8 +24,17 @@ class PagesCollection {
         return newPage
     }
     
-    func toJSON() {
+    func toJSON() -> String {
+        var dictionary = [String: AnyObject]();
+        var pagesArray: [AnyObject] = [];
         
+        for page in self.pages {
+            pagesArray.append(page.toDictionary())
+        }
+        
+        dictionary["pages"] = pagesArray;
+        
+        return Helper.JSONStringify(dictionary, prettyPrinted: false)
     }
     
 }

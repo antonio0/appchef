@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D4E70BB1A16808500F728F1 /* EditElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4E70BA1A16808500F728F1 /* EditElement.swift */; };
+		4D4E70BD1A1680C000F728F1 /* EditElement.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D4E70BC1A1680C000F728F1 /* EditElement.xib */; };
+		4DE1F6511A15F05D0037D349 /* DataSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1F6501A15F05D0037D349 /* DataSetsViewController.swift */; };
+		4DE1F6531A15F8000037D349 /* NewModelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DE1F6521A15F8000037D349 /* NewModelViewController.xib */; };
+		4DE1F6551A15F9910037D349 /* NewModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1F6541A15F9910037D349 /* NewModelViewController.swift */; };
+		90FD77941A1665580099E61F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FD77931A1665580099E61F /* PlayViewController.swift */; };
 		C5093C401A15DA7900B99A6B /* EditElementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5093C3E1A15DA7900B99A6B /* EditElementViewController.swift */; };
 		C5093C411A15DA7900B99A6B /* EditElementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5093C3F1A15DA7900B99A6B /* EditElementViewController.xib */; };
 		C5093C451A15E3AF00B99A6B /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5093C441A15E3AF00B99A6B /* DataSet.swift */; };
@@ -33,6 +39,10 @@
 		C5DC85C21A156C01008A2C7A /* AddElementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DC85C01A156C01008A2C7A /* AddElementsViewController.swift */; };
 		C5DC85C31A156C01008A2C7A /* AddElementsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */; };
 		C5DC85C61A156C61008A2C7A /* ViewTagEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */; };
+		C5FA57DA1A1631D700001ABD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FA57D91A1631D700001ABD /* Helper.swift */; };
+		C5FA57DC1A1650C500001ABD /* BindElementModelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5FA57DB1A1650C500001ABD /* BindElementModelController.xib */; };
+		C5FA57DE1A16542700001ABD /* BindElementModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FA57DD1A16542700001ABD /* BindElementModelController.swift */; };
+		C5FA57E01A16551600001ABD /* Bindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FA57DF1A16551600001ABD /* Bindings.swift */; };
 		C5FB9ECC1A15E9DB00975F21 /* DataSetsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +57,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D4E70BA1A16808500F728F1 /* EditElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditElement.swift; sourceTree = "<group>"; };
+		4D4E70BC1A1680C000F728F1 /* EditElement.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditElement.xib; sourceTree = "<group>"; };
+		4DE1F6501A15F05D0037D349 /* DataSetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSetsViewController.swift; sourceTree = "<group>"; };
+		4DE1F6521A15F8000037D349 /* NewModelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewModelViewController.xib; sourceTree = "<group>"; };
+		4DE1F6541A15F9910037D349 /* NewModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewModelViewController.swift; sourceTree = "<group>"; };
+		90FD77931A1665580099E61F /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		C5093C3E1A15DA7900B99A6B /* EditElementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditElementViewController.swift; sourceTree = "<group>"; };
 		C5093C3F1A15DA7900B99A6B /* EditElementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditElementViewController.xib; sourceTree = "<group>"; };
 		C5093C441A15E3AF00B99A6B /* DataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
@@ -77,6 +93,10 @@
 		C5DC85C01A156C01008A2C7A /* AddElementsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddElementsViewController.swift; sourceTree = "<group>"; };
 		C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddElementsViewController.xib; sourceTree = "<group>"; };
 		C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTagEnumerator.swift; sourceTree = "<group>"; };
+		C5FA57D91A1631D700001ABD /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		C5FA57DB1A1650C500001ABD /* BindElementModelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindElementModelController.xib; sourceTree = "<group>"; };
+		C5FA57DD1A16542700001ABD /* BindElementModelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindElementModelController.swift; sourceTree = "<group>"; };
+		C5FA57DF1A16551600001ABD /* Bindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bindings.swift; sourceTree = "<group>"; };
 		C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSetsCollection.swift; path = ../DataSetsCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +129,7 @@
 		C5AF9E221A15902D00F82EAB /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				C5FA57DF1A16551600001ABD /* Bindings.swift */,
 				C5AF9E251A15905A00F82EAB /* PagesCollection.swift */,
 				C5FB9ECB1A15E9DB00975F21 /* DataSetsCollection.swift */,
 			);
@@ -146,6 +167,7 @@
 		C5DC85881A15679B008A2C7A /* AppChef */ = {
 			isa = PBXGroup;
 			children = (
+				C5FA57D81A1631CA00001ABD /* Helper */,
 				C5093C461A15E4DF00B99A6B /* Vendor */,
 				C5AF9E241A15904800F82EAB /* Entity */,
 				C5AF9E221A15902D00F82EAB /* Collection */,
@@ -189,15 +211,20 @@
 		C5DC85AE1A1569B0008A2C7A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4DE1F6541A15F9910037D349 /* NewModelViewController.swift */,
 				C5DC85901A15679B008A2C7A /* LoginViewController.swift */,
 				C5DC85B01A1569D5008A2C7A /* WelcomeViewController.swift */,
+				90FD77931A1665580099E61F /* PlayViewController.swift */,
 				C5DC85B21A1569E5008A2C7A /* MainEditViewController.swift */,
 				C5DC85B41A156BB2008A2C7A /* RightSideViewController.swift */,
+				4DE1F6501A15F05D0037D349 /* DataSetsViewController.swift */,
 				C5DC85B81A156BD2008A2C7A /* LeftSideBarViewController.swift */,
 				C5DC85BC1A156BEA008A2C7A /* PagesManagerViewController.swift */,
 				C5093C3E1A15DA7900B99A6B /* EditElementViewController.swift */,
 				C5DC85C01A156C01008A2C7A /* AddElementsViewController.swift */,
 				C5AF9E2B1A1598A700F82EAB /* ElementsTouchController.swift */,
+				C5FA57DD1A16542700001ABD /* BindElementModelController.swift */,
+				4D4E70BA1A16808500F728F1 /* EditElement.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -205,6 +232,9 @@
 		C5DC85AF1A1569BB008A2C7A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C5FA57DB1A1650C500001ABD /* BindElementModelController.xib */,
+				4DE1F6521A15F8000037D349 /* NewModelViewController.xib */,
+				4D4E70BC1A1680C000F728F1 /* EditElement.xib */,
 				C5DC85921A15679B008A2C7A /* Main.storyboard */,
 				C5DC85C11A156C01008A2C7A /* AddElementsViewController.xib */,
 				C5DC85B91A156BD2008A2C7A /* LeftSideBarViewController.xib */,
@@ -221,6 +251,14 @@
 				C5DC85C51A156C61008A2C7A /* ViewTagEnumerator.swift */,
 			);
 			name = Enum;
+			sourceTree = "<group>";
+		};
+		C5FA57D81A1631CA00001ABD /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C5FA57D91A1631D700001ABD /* Helper.swift */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,10 +310,11 @@
 				TargetAttributes = {
 					C5DC85851A15679B008A2C7A = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = C22NCN7Y4U;
 					};
 					C5DC859D1A15679B008A2C7A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 756MSMTJ5A;
+						DevelopmentTeam = C22NCN7Y4U;
 						TestTargetID = C5DC85851A15679B008A2C7A;
 					};
 				};
@@ -310,8 +349,11 @@
 				C5DC85B71A156BB2008A2C7A /* RightSideBarViewController.xib in Resources */,
 				C5DC85961A15679B008A2C7A /* Images.xcassets in Resources */,
 				C5093C411A15DA7900B99A6B /* EditElementViewController.xib in Resources */,
+				4D4E70BD1A1680C000F728F1 /* EditElement.xib in Resources */,
 				C5DC85C31A156C01008A2C7A /* AddElementsViewController.xib in Resources */,
 				C5DC85BF1A156BEA008A2C7A /* PagesManagerViewController.xib in Resources */,
+				4DE1F6531A15F8000037D349 /* NewModelViewController.xib in Resources */,
+				C5FA57DC1A1650C500001ABD /* BindElementModelController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,13 +375,20 @@
 				C5DC85911A15679B008A2C7A /* LoginViewController.swift in Sources */,
 				C5AF9E281A1590CC00F82EAB /* Page.swift in Sources */,
 				C5AF9E2A1A15936A00F82EAB /* Element.swift in Sources */,
+				C5FA57E01A16551600001ABD /* Bindings.swift in Sources */,
 				C5DC85BE1A156BEA008A2C7A /* PagesManagerViewController.swift in Sources */,
 				C5DC85B11A1569D5008A2C7A /* WelcomeViewController.swift in Sources */,
 				C5DC85C21A156C01008A2C7A /* AddElementsViewController.swift in Sources */,
 				C5DC858C1A15679B008A2C7A /* AppDelegate.swift in Sources */,
+				C5FA57DA1A1631D700001ABD /* Helper.swift in Sources */,
+				4DE1F6511A15F05D0037D349 /* DataSetsViewController.swift in Sources */,
+				C5FA57DE1A16542700001ABD /* BindElementModelController.swift in Sources */,
+				4D4E70BB1A16808500F728F1 /* EditElement.swift in Sources */,
+				4DE1F6551A15F9910037D349 /* NewModelViewController.swift in Sources */,
 				C5DC85B31A1569E5008A2C7A /* MainEditViewController.swift in Sources */,
 				C5AF9E261A15905A00F82EAB /* PagesCollection.swift in Sources */,
 				C5DC85C61A156C61008A2C7A /* ViewTagEnumerator.swift in Sources */,
+				90FD77941A1665580099E61F /* PlayViewController.swift in Sources */,
 				C5DC85B61A156BB2008A2C7A /* RightSideViewController.swift in Sources */,
 				C5093C401A15DA7900B99A6B /* EditElementViewController.swift in Sources */,
 				C5AF9E2C1A1598A700F82EAB /* ElementsTouchController.swift in Sources */,
@@ -478,7 +527,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b7c3e3b9-3c70-4afd-a1c2-d7598c09e229";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -493,7 +542,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b7c3e3b9-3c70-4afd-a1c2-d7598c09e229";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

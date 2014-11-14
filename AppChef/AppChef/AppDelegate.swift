@@ -15,11 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var pagesCollection: PagesCollection?
     var dataSetsCollection: DataSetsCollection?
+    var bindings: Bindings?
+    
+    var counter = 0
+    
+    func newID () -> Int {
+        counter = counter + 1
+        return counter
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.pagesCollection    = PagesCollection()
         self.dataSetsCollection = DataSetsCollection()
+        self.bindings = Bindings()
         
         // Override point for customization after application launch.
         return true

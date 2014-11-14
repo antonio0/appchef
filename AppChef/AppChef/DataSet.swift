@@ -9,20 +9,18 @@
 import Foundation
 import UIKit
 
-enum DataSetType {
-    case Parse
-    case REST
-}
 
 class DataSet {
+    var id: Int
     var keys : [String] = []
-    var type: DataSetType
+    var type: ModelType
     var apiUrl: String?
     var parseObjectName: String?
 //    var id: Int
     var name: String
     
-    init(name: String, type: DataSetType) {
+    init(name: String, type: ModelType, id: Int) {
+        self.id = id
         self.name = name;
         self.type = type;
     }

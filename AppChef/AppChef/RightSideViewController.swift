@@ -8,9 +8,10 @@
 
 import UIKit
 
-class RightSideViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class RightSideViewController: UIViewController {
 
-    var dataSetsCollection : DataSetsCollection?
+    
+    var _delegate: MainEditViewController?
     
 //    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)  {
 //        // Initialize variables.
@@ -23,29 +24,42 @@ class RightSideViewController: UITableViewController, UITableViewDataSource, UIT
 //        super.init(coder: aDecoder)
 //    }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cellId = "cell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellId) as UITableViewCell?
-        
-        if(cell == nil) {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
-        }
-        
-        cell!.textLabel.text = self.dataSetsCollection!.datasets[indexPath.row].name;
-        return cell!;
-        
-    }
+      
+    var addDataSet: UIButton?
     
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSetsCollection!.datasets.count
-    }
-    
+    var newModelController = NewModelViewController(nibName: "NewModelViewController", bundle: nil)
+    var dataSetsViewController = DataSetsViewController()
 
+    
+    func setDelegate (delegate: MainEditViewController) {
+        _delegate = delegate
+        dataSetsViewController.setMainVC(delegate)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        dataSetsViewController.tableView.frame = CGRect(x: 0, y: 60, width: self.view.bounds.width, height: self.view.bounds.height)
+        
+        self.addChildViewController(dataSetsViewController)
+        self.view.addSubview(dataSetsViewController.tableView)
 
+        
+        addDataSet = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 60))
+        addDataSet!.backgroundColor = UIColor.redColor()
+        addDataSet!.setTitle("New DataSet +", forState: .Normal)
+        addDataSet!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        addDataSet!.addTarget(self, action: "newModel", forControlEvents: .TouchUpInside)
+        self.view.addSubview(addDataSet!)
+
+        
+        
+        
+        //        var PagesViewController    = SideTableViewController()
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -55,6 +69,20 @@ class RightSideViewController: UITableViewController, UITableViewDataSource, UIT
     }
     
 
+    func newModel () {
+        println("new model")
+        newModelController.setDelegate(self)
+        newModelController.view.frame = CGRect(x: 0, y: self.view.superview!.bounds.height - 500, width: self.view.superview!.bounds.width, height: 500)
+//        newModelController.view.center = self.view.superview!.center
+        self.view.superview!.addSubview(newModelController.view)
+        self.view.superview!.bringSubviewToFront(newModelController.view)
+        newModelController.view.frame.origin.y = self.view.superview!.bounds.height + 500
+        UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+            self.newModelController.view.frame.origin.y = self.view.superview!.bounds.height - 500
+        }, completion: nil)
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -65,4 +93,49 @@ class RightSideViewController: UITableViewController, UITableViewDataSource, UIT
     }
     */
 
+    
+    
+    
+    var dragging = false;
+    var start: CGPoint? = nil;
+    
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        recurseView(self.view);
+        println("touchesbegan")
+        if _delegate!.sideBarShowing == .Right {
+            dragging = true;
+            let touch: AnyObject? = touches.anyObject();
+            start = touch!.locationInView(self.view)
+        }
+    }
+    
+    func recurseView(view: UIView) {
+        for subview in view.subviews {
+            self.recurseView(subview as UIView);
+        }
+        view.resignFirstResponder();
+    }
+    
+    var path = UIBezierPath();
+    var shapeLayer = CAShapeLayer();
+    var wiggle = false
+    
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        
+     
+    }
+    
+    
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        
+    }
+    
+    func radians(r: Double) -> CGFloat {
+        return (CGFloat)((r * M_PI) / 180.0);
+    }
+    
+    
+    
+    
 }

@@ -11,7 +11,7 @@ import UIKit
 
 class Page {
     
-    var elememnts : [Element] = []
+    var elements : [Element] = []
     var screenshot : UIImage?
     var view : UIView
     
@@ -31,13 +31,38 @@ class Page {
         self.screenshot = screenshot;
     }
     
-    func addElement(uiViewElementToBeAdded: UIView) {
-        let element = Element(uiElement: uiViewElementToBeAdded)
-        self.elememnts.append(element)
+    
+    func addElement(uiViewElementToBeAdded: UIView, type: String) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
+        let element = Element(uiElement: uiViewElementToBeAdded, type: type, id: appDelegate.newID())
+        self.elements.append(element)
         self.view.addSubview(uiViewElementToBeAdded)
     }
     
-    func toJSON() -> NSString {
-        return "hello"
+    func getElement (point: CGPoint) -> Element? {
+        for element in self.elements {
+            if CGRectContainsPoint(element.uiElement.frame, point) {
+                return element
+            }
+        }
+        return nil
+    }
+    
+    func toDictionary() -> [String: AnyObject] {
+        var dictionary = [String: AnyObject]()
+        dictionary["id"] = 0;
+        
+        var elementsArray = [AnyObject]()
+        
+        for element in self.elements {
+            elementsArray.append(element.toDictionary())
+        }
+        
+        dictionary["elements"] = elementsArray;
+        
+        return dictionary
+        
     }
 }

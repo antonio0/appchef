@@ -8,7 +8,17 @@
 
 import UIKit
 
-class MainEditViewController: UIViewController {
+enum SideBarShowing: Int {
+    case None
+    case Left
+    case Right
+}
+
+class MainEditViewController: UIViewController
+{
+    
+    var editElement = EditElement(nibName: "EditElement", bundle: nil)
+
     
     var pagesManager : PagesManagerViewController?
     var addElements  : AddElementsViewController?
@@ -18,6 +28,15 @@ class MainEditViewController: UIViewController {
     var pagesCollection : PagesCollection?
     var dataSetsCollection: DataSetsCollection?
 
+    var path = UIBezierPath();
+    var shapeLayer = CAShapeLayer();
+    
+    var overScreenMenu = false;
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,11 +46,11 @@ class MainEditViewController: UIViewController {
         
         self.initElementsTouchController()
         
-        
         self.initMenus()
         self.addGestureRecognizers()
   
         self.initPageView()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +78,7 @@ class MainEditViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var swipeLeftGesture: UISwipeGestureRecognizer?
     
     func addGestureRecognizers() {
         let showPagesManagerGesture = UISwipeGestureRecognizer(target: self, action: "showPagesManager:")
@@ -71,10 +91,10 @@ class MainEditViewController: UIViewController {
         swipe3FingersDownGesture.numberOfTouchesRequired = 3
         self.view.addGestureRecognizer(swipe3FingersDownGesture)
         
-        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: "swipeLeft:")
-        swipeLeftGesture.direction = .Left;
-        swipeLeftGesture.numberOfTouchesRequired = 1;
-        self.view.addGestureRecognizer(swipeLeftGesture)
+        swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: "swipeLeft:")
+        swipeLeftGesture!.direction = .Left;
+        swipeLeftGesture!.numberOfTouchesRequired = 1;
+        self.view.addGestureRecognizer(swipeLeftGesture!)
         
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
         swipeRightGesture.direction = .Right
@@ -92,6 +112,7 @@ class MainEditViewController: UIViewController {
     
     func initLeftSideBar() {
 //        let leftSideBar      = LeftSideBarViewController(nibName: "LeftSideBarViewController", bundle: nil)
+
         let leftSideBar = LeftSideBarViewController()
         leftSideBar.tableView.frame = CGRect(x: 0, y: 0, width: 150, height: self.view.frame.height)
         leftSideBar.view.tag = EditViewTags.LeftSideBar.rawValue
@@ -103,10 +124,11 @@ class MainEditViewController: UIViewController {
         
 //        let rightSideBar      = RightSideViewController(nibName: "RightSideBarViewController", bundle: nil)
         let rightSideBar = RightSideViewController();
+        rightSideBar.setDelegate(self)
         rightSideBar.view.frame         = CGRect(x: self.view.frame.size.width, y: 0, width: 150, height: self.view.frame.height)
         
-        rightSideBar.dataSetsCollection = self.dataSetsCollection
-        rightSideBar.tableView.frame    = CGRect(x: UIScreen.mainScreen().bounds.width - 150, y: 40, width: 150, height: self.view.frame.width)
+//        rightSideBar.dataSetsCollection = self.dataSetsCollection
+        rightSideBar.view.frame    = CGRect(x: UIScreen.mainScreen().bounds.width - 150, y: 0, width: 150, height: self.view.frame.height)
         rightSideBar.view.tag = EditViewTags.LeftSideBar.rawValue
         self.addChildViewController(rightSideBar)
         self.rightSideBar  = rightSideBar
@@ -126,19 +148,31 @@ class MainEditViewController: UIViewController {
     
     func switchToPage(newPage: Page) {
         
-        let currentPageView = self.view.viewWithTag(EditViewTags.Page.rawValue)
+        let currentPageView = self.view.viewWithTag(EditViewTags.Page.rawValue)?
         let newPageView     = newPage.view;
+        
+        if(newPageView == currentPageView) {
+            return;
+        }
+        
         let newCGRect       = CGRect(x: self.view.frame.width, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
         newPageView.frame = newCGRect
         newPageView.tag = EditViewTags.Page.rawValue
         
-        self.view.insertSubview(newPageView, atIndex: 1)
+        if(currentPageView != nil) {
+            self.view.insertSubview(newPageView, aboveSubview: currentPageView!)
+        } else {
+            self.view.insertSubview(newPageView, atIndex: 0)
+        }
         
         UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0.0, options: nil, animations: { () -> Void in
             newPageView.frame.origin.x = 0;
         }) { (Bool) -> Void in
-            currentPageView!.removeFromSuperview()
+            if(currentPageView != nil) {
+                currentPageView!.removeFromSuperview()
+            }
+            
             self.pagesCollection!.activePage = newPage
 
         }
@@ -146,12 +180,14 @@ class MainEditViewController: UIViewController {
     }
     
     func showPagesManager(gesture: UIGestureRecognizer) {
+        
         let pagesManagerView = self.view.viewWithTag(EditViewTags.PagesManager.rawValue)?
         
         if(pagesManagerView == nil) {
             self.pagesCollection?.activePage?.updateScreenshot()
             self.pagesManager!.updatePagesList()
             self.addAndShowUIViewWithAnimation(self.pagesManager!.view)
+            self.overScreenMenu = true;
         }
         
     }
@@ -162,7 +198,9 @@ class MainEditViewController: UIViewController {
             viewToHide.alpha = 0
             }, completion: { (Bool) -> Void in
                 viewToHide.removeFromSuperview();
+           
         })
+        
         
     }
     
@@ -176,6 +214,7 @@ class MainEditViewController: UIViewController {
             viewToAdd.alpha = 1
         })
         
+     
 
     }
     
@@ -186,6 +225,8 @@ class MainEditViewController: UIViewController {
                 addElementsView.alpha = 0
             })
             
+            self.overScreenMenu = false;
+
         }
     }
     
@@ -199,10 +240,15 @@ class MainEditViewController: UIViewController {
         
         if let pagesManagerView = self.view.viewWithTag(EditViewTags.PagesManager.rawValue) {
             self.hideUIViewWithAnimationAndRemove(pagesManagerView)
+            self.overScreenMenu = false
         } else if let addElementsView = self.view.viewWithTag(EditViewTags.AddElements.rawValue) {
-            self.hideUIViewWithAnimationAndRemove(addElementsView)
+//            if addElementsView.alpha == 1 {
+                self.hideUIViewWithAnimationAndRemove(addElementsView)
+                self.overScreenMenu = false;
+//            }
         } else {
             self.addAndShowUIViewWithAnimation(self.addElements!.view)
+            self.overScreenMenu = true;
         }
     }
     
@@ -212,12 +258,35 @@ class MainEditViewController: UIViewController {
      * you want to show right side bar 
      * if the left sidebar if visible hide it then
      */
+    
+    var sideBarShowing: SideBarShowing = .None
+    
+//    func swipeLeft(gesture: UIGestureRecognizer) {
+//        if let leftSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
+//            self.hideUIViewWithAnimationAndRemove(leftSideBarView)
+//            leftSideBarVisible = false
+//        } else {
+//            self.addAndShowUIViewWithAnimation(self.rightSideBar!.view)
+//            rightSideBarVisible = true
+//        }
+//    }
+
     func swipeLeft(gesture: UIGestureRecognizer) {
-         if let leftSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
-            self.hideUIViewWithAnimationAndRemove(leftSideBarView)
-         } else {
-            self.addAndShowUIViewWithAnimation(self.rightSideBar!.view)
+        
+        if(self.overScreenMenu) {
+            return;
         }
+        
+        
+        if sideBarShowing == .Left {
+            sideBarShowing = .None
+            self.hideUIViewWithAnimationAndRemove(self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue)!)
+        } else if sideBarShowing == .None {
+            sideBarShowing = .Right
+            self.addAndShowUIViewWithAnimation(self.rightSideBar!.view)
+            swipeLeftGesture!.enabled = false
+        }
+        
     }
 
     
@@ -226,13 +295,35 @@ class MainEditViewController: UIViewController {
      * you want to show the left side bar
      * if the right sidebar if visible hide it then
      */
+//    func swipeRight(gesture: UIGestureRecognizer) {
+//        if let rightSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
+//            self.hideUIViewWithAnimationAndRemove(rightSideBarView)
+//            rightSideBarVisible = false
+//        } else {
+//            self.addAndShowUIViewWithAnimation(self.leftSideBar!.view)
+//            leftSideBarVisible = true
+//        }
+//    }
     func swipeRight(gesture: UIGestureRecognizer) {
-        if let rightSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
-            self.hideUIViewWithAnimationAndRemove(rightSideBarView)
-        } else {
+        
+        if(self.overScreenMenu) {
+            return;
+        }
+        
+        
+        swipeLeftGesture!.enabled = true
+
+        if sideBarShowing == .Right {
+            sideBarShowing = .None
+            self.hideUIViewWithAnimationAndRemove(self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue)!)
+        } else if sideBarShowing == .None {
+            sideBarShowing = .Left
             self.addAndShowUIViewWithAnimation(self.leftSideBar!.view)
         }
+        
     }
+
+    
 
     /*
     // MARK: - Navigation
@@ -243,5 +334,11 @@ class MainEditViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    
+        
+    
 
+    
 }
