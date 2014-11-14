@@ -88,13 +88,26 @@ class JsonDecoder {
     }
     
     func addNavButton( prefix : String, id: Int, buttonJson: JSON, middleOptional : String, endOptional : String ) {
-        let buttonId = buttonJson["id"]
+        let buttonId = buttonJson["id"].integerValue!
         let text = buttonJson["text"]
         code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Button(\(buttonId), text:\"\(text)\"\(endOptional) )\n"
+        
+        if buttonJson["onClick"] {
+            let action = buttonJson["onClick"]["action"]
+            switch action.stringValue! {
+            case "goToPage":
+                addActionNavigateToButton(prefix, id: id, idButton: buttonId, actionJson: buttonJson["onClick"])
+            case "add":
+                addActionAddToButton(prefix, id: id, idButton: buttonId, actionJson: buttonJson["onClick"])
+            default:
+                println("Action unrecognised.")
+            }
+        }
+        
     }
     
     func addButton( prefix : String, id: Int, buttonJson: JSON, middleOptional : String, endOptional : String ) {
-        let buttonId = buttonJson["id"]
+        let buttonId = buttonJson["id"].integerValue!
         let color = buttonJson["color"]
         let pos = getPosition(buttonJson)
         let radius = buttonJson["radius"]
@@ -106,6 +119,41 @@ class JsonDecoder {
             let textSource = buttonJson["textSource"]
             code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Button(\(buttonId), textSource: \"\(textSource)\", color: \"\(color)\", position: \(pos), radius: \(radius) )\n"
         }
+        
+        if buttonJson["onClick"] {
+            let action = buttonJson["onClick"]["action"]
+            switch action.stringValue! {
+                case "goToPage":
+                    addActionNavigateToButton(prefix, id: id, idButton: buttonId, actionJson: buttonJson["onClick"])
+                case "add":
+                    addActionAddToButton(prefix, id: id, idButton: buttonId, actionJson: buttonJson["onClick"])
+                default:
+                    println("Action unrecognised.")
+            }
+        }
+    }
+    
+    func addActionAddToButton(prefix : String, id: Int, idButton: Int, actionJson: JSON)
+    {
+        let dataSetId = actionJson["dataset"]
+        code = "\(code)\(prefix)(\(id)).addAction(\(idButton), addToDataSet: \(dataSetId), itemsToAdd: [ "
+        var first = true
+        for itemToAdd in actionJson["itemsToAdd"].arrayValue! {
+            if first == false {
+                code = "\(code), "
+            }
+            let key = itemToAdd["key"]
+            let idSource = itemToAdd["source"]
+            code = "\(code)\"\(key)\":\(idSource)"
+            first = false
+        }
+        code = "\(code)])\n"
+    }
+    
+    func addActionNavigateToButton(prefix : String, id: Int, idButton: Int, actionJson: JSON)
+    {
+        let pageId = actionJson["pageId"].integerValue!
+        code = "\(code)\(prefix)(\(id)).addAction(\(idButton), navigateTo:\(pageId))\n"
     }
     
     func addLabel(prefix : String, id: Int, labelJson: JSON, middleOptional : String, endOptional : String) {
@@ -184,7 +232,7 @@ class JsonDecoder {
         let name = jsonDataset["name"]
         let link = jsonDataset["link"]
         let keys = jsonDataset["keys"].arrayValue!
-        var command = "Datasets!.create(id: \(datasetId), name: \"\(name)\", API:\"\(link)\"), keys: ["
+        var command = "Datasets!.create(id: \(datasetId), name: \"\(name)\", API:\"\(link)\", keys: ["
         if keys.count > 0 {
             command = "\(command)\"\(keys[0])\""
         }
