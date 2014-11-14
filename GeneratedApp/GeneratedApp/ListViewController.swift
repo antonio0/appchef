@@ -13,8 +13,6 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
 
     var _dataSet: DataSet?
     
-    var tableItems: [String] = []
-   
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -22,6 +20,9 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
     
     func setDataSet(dataSet: DataSet) {
         _dataSet = dataSet
+        _dataSet!.subscribe({ (thing) -> Void in
+            self.tableView.reloadData()
+        })
     }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -63,17 +64,10 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
         }
         
         
-        
-        cell!.textLabel.text = tableItems[indexPath.row]
+        let row = _dataSet!.getRow(indexPath.row)
+        cell!.textLabel.text = row!["two"]
         
         return cell!
     }
-    
-    func addItem (items: String...) {
-        for item in items {
-            tableItems.append(item)
-        }
-    }
-    
     
 }

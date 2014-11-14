@@ -35,6 +35,10 @@ class DataSet {
         self._callback = callback
     }
     
+    func getRow(row: Int) -> [String: String]? {
+        return data[row]
+    }
+    
     func numItems() -> Int {
         return data.count
     }

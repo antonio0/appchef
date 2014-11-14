@@ -59,9 +59,9 @@
 		4D846D481A15845D002FE10D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4D846D431A15716B002FE10D /* DataSet.swift */,
 				4D846D411A157123002FE10D /* ListViewController.swift */,
 				4DEC891B1A156B910052B935 /* PagesViewController.swift */,
-				4D846D431A15716B002FE10D /* DataSet.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
