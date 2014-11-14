@@ -15,9 +15,9 @@ class Element {
     var type:  String
     var cellElements: [Element] = []
     var source : Int?
-    var indexInPage: Int?
     
-    var dataSet: DataSet?
+    var indexInPage: Int?
+
     var appDelegate: AppDelegate
     var bindings: Bindings
     var actions: [String:AnyObject] = [:]
@@ -28,6 +28,7 @@ class Element {
         self.type      = type
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         bindings = appDelegate.bindings!
+
     }
     
     func toJSON() -> NSString {

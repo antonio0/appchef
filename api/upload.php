@@ -36,4 +36,6 @@ chmod("$apppath/app.json", 0777);
 
 passthru("/Applications/XAMPP/htdocs/api/a.sh $apppath/app.json $apppath/jessies.txt");
 
-passthru("python /Applications/XAMPP/htdocs/xcProjGenerator/genXCproj.py $author $appname");
+passthru("cp -pr /Applications/XAMPP/htdocs/GeneratedApp $apppath");
+
+//passthru("python /Applications/XAMPP/htdocs/xcProjGenerator/genXCproj.py $author $appname");
