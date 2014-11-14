@@ -8,7 +8,14 @@
 
 import UIKit
 
-class MainEditViewController: UIViewController {
+enum SideBarShowing: Int {
+    case None
+    case Left
+    case Right
+}
+
+class MainEditViewController: UIViewController
+{
     
     var pagesManager : PagesManagerViewController?
     var addElements  : AddElementsViewController?
@@ -18,11 +25,15 @@ class MainEditViewController: UIViewController {
     var pagesCollection : PagesCollection?
     var dataSetsCollection: DataSetsCollection?
 
+    var path = UIBezierPath();
+    var shapeLayer = CAShapeLayer();
+    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
-    
+    var label = UILabel(frame: CGRect(x: 40, y: 40, width: 80, height: 80))
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +48,10 @@ class MainEditViewController: UIViewController {
         self.addGestureRecognizers()
   
         self.initPageView()
+        label.backgroundColor = UIColor.greenColor();
+        
+        self.view.addSubview(label)
+        
         // Do any additional setup after loading the view.
     }
     
@@ -64,6 +79,7 @@ class MainEditViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var swipeLeftGesture: UISwipeGestureRecognizer?
     
     func addGestureRecognizers() {
         let showPagesManagerGesture = UISwipeGestureRecognizer(target: self, action: "showPagesManager:")
@@ -76,10 +92,10 @@ class MainEditViewController: UIViewController {
         swipe3FingersDownGesture.numberOfTouchesRequired = 3
         self.view.addGestureRecognizer(swipe3FingersDownGesture)
         
-        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: "swipeLeft:")
-        swipeLeftGesture.direction = .Left;
-        swipeLeftGesture.numberOfTouchesRequired = 1;
-        self.view.addGestureRecognizer(swipeLeftGesture)
+        swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: "swipeLeft:")
+        swipeLeftGesture!.direction = .Left;
+        swipeLeftGesture!.numberOfTouchesRequired = 1;
+        self.view.addGestureRecognizer(swipeLeftGesture!)
         
         let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: "swipeRight:")
         swipeRightGesture.direction = .Right
@@ -218,12 +234,30 @@ class MainEditViewController: UIViewController {
      * you want to show right side bar 
      * if the left sidebar if visible hide it then
      */
+    
+    var sideBarShowing: SideBarShowing = .None
+    
+//    func swipeLeft(gesture: UIGestureRecognizer) {
+//        if let leftSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
+//            self.hideUIViewWithAnimationAndRemove(leftSideBarView)
+//            leftSideBarVisible = false
+//        } else {
+//            self.addAndShowUIViewWithAnimation(self.rightSideBar!.view)
+//            rightSideBarVisible = true
+//        }
+//    }
+
     func swipeLeft(gesture: UIGestureRecognizer) {
-         if let leftSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
-            self.hideUIViewWithAnimationAndRemove(leftSideBarView)
-         } else {
+        
+        if sideBarShowing == .Left {
+            sideBarShowing = .None
+            self.hideUIViewWithAnimationAndRemove(self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue)!)
+        } else if sideBarShowing == .None {
+            sideBarShowing = .Right
             self.addAndShowUIViewWithAnimation(self.rightSideBar!.view)
+            swipeLeftGesture!.enabled = false
         }
+        
     }
 
     
@@ -232,13 +266,29 @@ class MainEditViewController: UIViewController {
      * you want to show the left side bar
      * if the right sidebar if visible hide it then
      */
+//    func swipeRight(gesture: UIGestureRecognizer) {
+//        if let rightSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
+//            self.hideUIViewWithAnimationAndRemove(rightSideBarView)
+//            rightSideBarVisible = false
+//        } else {
+//            self.addAndShowUIViewWithAnimation(self.leftSideBar!.view)
+//            leftSideBarVisible = true
+//        }
+//    }
     func swipeRight(gesture: UIGestureRecognizer) {
-        if let rightSideBarView = self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue) {
-            self.hideUIViewWithAnimationAndRemove(rightSideBarView)
-        } else {
+        swipeLeftGesture!.enabled = true
+
+        if sideBarShowing == .Right {
+            sideBarShowing = .None
+            self.hideUIViewWithAnimationAndRemove(self.view.viewWithTag(EditViewTags.LeftSideBar.rawValue)!)
+        } else if sideBarShowing == .None {
+            sideBarShowing = .Left
             self.addAndShowUIViewWithAnimation(self.leftSideBar!.view)
         }
+        
     }
+
+    
 
     /*
     // MARK: - Navigation
@@ -250,15 +300,10 @@ class MainEditViewController: UIViewController {
     }
     */
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        recurseView(self.view);
-    }
     
-    func recurseView(view: UIView) {
-        for subview in view.subviews {
-            self.recurseView(subview as UIView);
-        }
-        view.resignFirstResponder();
-    }
+    
+        
+    
 
+    
 }

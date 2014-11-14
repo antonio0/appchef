@@ -9,12 +9,15 @@
 import Foundation
 import UIKit
 
-enum Show: Int {
+enum ModelType: Int {
     case API
     case Parse
 }
 
 class NewModelViewController: UIViewController, UITextFieldDelegate {
+    var appDelegate: AppDelegate?
+
+    var currModelType: ModelType = .API
     
     @IBOutlet weak var HeaderView: UIView!
     @IBOutlet weak var NewModelText: UILabel!
@@ -25,6 +28,10 @@ class NewModelViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var apiOrParse: UISegmentedControl!
     @IBOutlet weak var dataSetName: UITextField!
     
+    @IBOutlet weak var keysLabel: UILabel!
+    @IBOutlet weak var url: UITextField!
+
+    @IBOutlet weak var keyToAdd: UITextField!
     var keys: [String] = []
     
     func textFieldDidBeginEditing(textField: UITextField!) {    //delegate method
@@ -45,18 +52,23 @@ class NewModelViewController: UIViewController, UITextFieldDelegate {
     
     func initialiseView() {
         showView(.API)
+        keysLabel.text = ""
+        keyToAdd.text = ""
+
     }
     
     @IBAction func selectedModelType(sender: UISegmentedControl) {
         var value = sender.selectedSegmentIndex
         if value == 0 {
             showView(.API)
+            self.currModelType = .API
         } else {
             showView(.Parse)
+            self.currModelType = .Parse
         }
     }
     
-    func showView(toShow: Show) {
+    func showView(toShow: ModelType) {
         APIView.hidden   = true
         ParseView.hidden = true
         
@@ -74,6 +86,7 @@ class NewModelViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
         initialiseView()
 //        self.dataSetName.becomeFirstResponder()
         // Do any additional setup after loading the view, typically from a nib.
@@ -84,11 +97,33 @@ class NewModelViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    var _delegate: RightSideViewController?
     
-    @IBAction func Add(sender: AnyObject) {
+    func setDelegate (delegate: RightSideViewController) {
+        _delegate = delegate
     }
     
+    @IBAction func Add(sender: AnyObject) {
+        println("sdfsdf")
+        appDelegate!.dataSetsCollection!.create(dataSetName!.text!, type: self.currModelType, keys: keys)
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+            self.view.frame.origin.y = self.view.bounds.height + 500
+        }, completion: nil)
+        
+        _delegate!.dataSetsViewController.tableView.reloadData()
+    
+    }
+    
+    
     @IBAction func AddKey(sender: AnyObject) {
+        println( keyToAdd.text )
+        keys.append(keyToAdd!.text)
+        if keys.count > 1 {
+            keysLabel.text = "\(keysLabel!.text!), \(keyToAdd!.text!)"
+        } else {
+            keysLabel.text = "\(keyToAdd!.text!)"
+        }
+        keyToAdd.text = ""
     }
     
     override func didReceiveMemoryWarning() {

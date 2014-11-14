@@ -17,11 +17,10 @@ class DataSetsCollection : NSObject {
         
     }
     
-    func createDataSet(name:String, type: DataSetType) -> DataSet {
-        let newDataSet = DataSet(name: name, type: type)
+    func create(name:String, type: ModelType, keys: [String]) {
+        var newDataSet = DataSet(name: name, type: type)
+        newDataSet.keys = keys
         self.datasets.append(newDataSet)
-        
-        return newDataSet
     }
     
     func toJSON() {

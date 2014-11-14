@@ -13,6 +13,9 @@
                 <outlet property="ParseView" destination="K0v-DN-abS" id="soD-FP-M4t"/>
                 <outlet property="apiOrParse" destination="tKy-MT-rn9" id="wfQ-Mb-63l"/>
                 <outlet property="dataSetName" destination="ZwC-BX-w6p" id="zpC-d2-13P"/>
+                <outlet property="keyToAdd" destination="ynb-0c-GvO" id="O1i-aK-5D1"/>
+                <outlet property="keysLabel" destination="Zcf-1J-SjJ" id="X4g-SP-uLe"/>
+                <outlet property="url" destination="wS1-cr-tXe" id="spF-Yy-kPn"/>
                 <outlet property="view" destination="iN0-l3-epB" id="b0L-gh-rJ7"/>
             </connections>
         </placeholder>

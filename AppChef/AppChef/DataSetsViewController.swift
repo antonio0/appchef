@@ -9,18 +9,69 @@
 import Foundation
 import UIKit
 
-class DataSetsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class DataSetsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
     
     var dataSetsCollection : DataSetsCollection?
     var appDelegate: AppDelegate?
+//    var path = UIBezierPath();
+//    var shapeLayer = CAShapeLayer();
+    var wiggle = false
+    
+    var mainVC: MainEditViewController?
+    
+//
+//    
+   var panGesture: UIPanGestureRecognizer?
+//    BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    return YES;
+//    }
+//    
+    
+//    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
     
     var addDataSet: UIButton?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
         dataSetsCollection = appDelegate!.dataSetsCollection
 
+        
+        panGesture = UIPanGestureRecognizer(target: self, action: "panGestureDetected:")
+        
+        panGesture!.maximumNumberOfTouches = 1;
+        panGesture!.minimumNumberOfTouches = 1;
+        panGesture!.delegate = self;
+        self.tableView.addGestureRecognizer(panGesture!);
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func setMainVC(vc: MainEditViewController) {
+        self.mainVC = vc
+    }
+    
+    var dragging = false
+    var start: CGPoint?
+
+    func panGestureDetected(recognizer:UIPanGestureRecognizer) {
+        println("pan")
+        let translation = recognizer.translationInView(self.view)
+        
+        if dragging == false {
+            start = recognizer.locationInView(mainVC!.view)
+            println("set start to \(start)")
+        }
+        
+        dragging = true
+        
+        if(recognizer.state == .Ended) {
+            dragging = false
+
+            endMoveLine(recognizer.locationInView(mainVC!.view))
+        } else {
+            moveLine(recognizer.locationInView(mainVC!.view))
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,5 +98,36 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSetsCollection!.datasets.count
     }
-//
+    
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        println("touchesbegan")
+    
+    }
+    
+    func moveLine(to: CGPoint) {
+        
+        println("to: \(to), start: \(start)")
+        mainVC!.path.removeAllPoints();
+        var dx = to.x - start!.x;
+        var dy = to.y - start!.y;
+        mainVC!.path.moveToPoint(start!)
+        mainVC!.path.addLineToPoint(to)
+        mainVC!.shapeLayer.path = mainVC!.path.CGPath
+        mainVC!.shapeLayer.strokeColor = UIColor.blackColor().CGColor;
+        mainVC!.shapeLayer.lineWidth = 2;
+        mainVC!.shapeLayer.fillColor = UIColor.clearColor().CGColor;
+        mainVC!.view.layer.addSublayer(mainVC!.shapeLayer)
+    }
+    
+    func endMoveLine(point: CGPoint) {
+        dragging = false;
+        start = nil;
+        //stopWiggle()
+        mainVC!.shapeLayer.path = nil;
+    }
+    
+    
+
+
 }
