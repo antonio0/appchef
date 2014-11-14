@@ -32,20 +32,61 @@ class Page {
     }
     
     
-    func addElement(uiViewElementToBeAdded: UIView, type: String) {
+    func addElement(uiViewElementToBeAdded: UIView, type: String, point: CGPoint) -> Element{
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var newElement = self.createElement(uiViewElementToBeAdded, type: type)
         
-        let element = Element(uiElement: uiViewElementToBeAdded, type: type, id: appDelegate.newID())
-        self.elements.append(element)
+        if let existingElement = self.getElement(point) {
+            if(existingElement.type == "list") {
+                existingElement.cellElements.append(newElement)
+                
+                
+                self.view.addSubview(uiViewElementToBeAdded)
+                
+                return newElement;
+            
+            } else {
+                 self.elements.append(newElement)
+            }
+        } else {
+            self.elements.append(newElement)
+        }
+        
+        newElement.indexInPage = self.elements.count - 1;
         self.view.addSubview(uiViewElementToBeAdded)
+        return newElement
+    }
+    
+    func moveToList(element: Element, list: Element) {
+        
+        self.elements.removeAtIndex(element.indexInPage!)
+        
+        element.uiElement.removeFromSuperview()
+
+        list.uiElement.addSubview(element.uiElement)
+        list.cellElements.append(element)
+    }
+   
+    func createElement(uiViewElementToBeAdded: UIView, type: String) -> Element {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let element = Element(uiElement: uiViewElementToBeAdded, type: type, id: appDelegate.newID())
+        
+        return element
     }
     
     func getElement (point: CGPoint) -> Element? {
         for element in self.elements {
+            
             if CGRectContainsPoint(element.uiElement.frame, point) {
                 return element
             }
+            
+            for cellElement in element.cellElements {
+                if CGRectContainsPoint(cellElement.uiElement.frame, point) {
+                    return cellElement
+                }
+            }
+            
         }
         return nil
     }

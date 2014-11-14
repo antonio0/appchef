@@ -15,6 +15,7 @@ class AddElementsViewController: UIViewController {
     var draggedElement   : UIView?
     var pagesCollection  : PagesCollection?
     var delegate:          MainEditViewController?
+    var elementElement: Element?
     
     let tint = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 1.0)
 
@@ -23,7 +24,8 @@ class AddElementsViewController: UIViewController {
     @IBOutlet weak var buttonIcon: UIImageView!
     @IBOutlet weak var pictureIcon: UIImageView!
     @IBOutlet weak var Label: UIImageView!
-    
+    @IBOutlet weak var listIcon: UIImageView!
+    @IBOutlet weak var navIcon: UIImageView!
     
     override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)  {
         // Initialize variables.
@@ -51,7 +53,17 @@ class AddElementsViewController: UIViewController {
         self.initPicture()
         self.initLabel()
         self.initInputField()
+        self.initList()
+        self.initNavIcon()
         // Do any additional setup after loading the view.
+    }
+    
+    func initNavIcon() {
+        let  navFac = UIPanGestureRecognizer(target: self, action: "spanNav:")
+        self.navIcon.addGestureRecognizer(navFac)
+        self.navIcon.userInteractionEnabled = true;
+        
+
     }
     
     func initInputField() {
@@ -59,6 +71,14 @@ class AddElementsViewController: UIViewController {
         self.inputFieldIcon.addGestureRecognizer(inputFactoryRec)
         self.inputFieldIcon.userInteractionEnabled = true;
         
+    }
+    
+    func initList() {
+        let listFac = UIPanGestureRecognizer(target: self, action: "spanList:")
+        
+        self.listIcon.addGestureRecognizer(listFac)
+        self.listIcon.userInteractionEnabled = true;
+
     }
     
     
@@ -84,7 +104,91 @@ class AddElementsViewController: UIViewController {
         self.Label.userInteractionEnabled = true;
 
     }
-
+    
+    func spanList(recognizer: UIPanGestureRecognizer) {
+        let activePage = self.pagesCollection?.activePage!;
+        
+        if (!self.dragging) {
+            
+            let input    = UIView(frame: self.view.superview!.frame);
+            input.frame  = CGRect(x: recognizer.view!.frame.origin.x, y: recognizer.view!.frame.origin.y, width: self.view.frame.width, height: 150)
+            
+            let tint2 = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 0.2)
+            input.backgroundColor = tint2;
+            input.userInteractionEnabled = true;
+            
+            let dragRecognizer = UIPanGestureRecognizer(target: self.delegate!.touchController!, action: "drag:")
+            input.addGestureRecognizer(dragRecognizer)
+            dragRecognizer.maximumNumberOfTouches = 1
+            
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self.delegate!.touchController!, action: "longTouch:")
+            
+            input.addGestureRecognizer(longPressRecognizer)
+            
+            self.elementElement  = activePage!.addElement(input, type: "list", point: recognizer.locationInView(self.delegate!.view))
+            
+            self.dragging = true;
+            self.draggedElement = input
+            
+            self.delegate!.hideAddElements()
+            
+        } else if(recognizer.state != UIGestureRecognizerState.Ended) {
+            self.translate(recognizer)
+            
+        } else if(recognizer.state == UIGestureRecognizerState.Ended) {
+            
+            self.clean();
+            
+        }
+    }
+    
+    
+    func spanNav(recognizer: UIPanGestureRecognizer) {
+        let activePage = self.pagesCollection?.activePage!;
+        
+        if (!self.dragging) {
+            
+            let input    = UINavigationBar(frame: self.view.superview!.frame);
+//            input.addSubview(UINavigationItem(title: "CHUJKURWA"));
+            
+            let h = UINavigationItem(title: "KURWA")
+            input.items = NSArray(arrayLiteral: h)
+            input.topItem?.leftBarButtonItem =  UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Rewind, target: self, action: nil)
+            
+            input.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FastForward, target: self, action: nil)
+            
+            input.frame  = CGRect(x: recognizer.view!.frame.origin.x, y: recognizer.view!.frame.origin.y, width: self.view.frame.width, height: 65)
+           
+//            let tint2 = UIColor(red: 0.0, green: 122/255, blue: 1.0, alpha: 0.2)
+            
+            input.backgroundColor = UIColor.grayColor();
+            input.userInteractionEnabled = true;
+            
+            let dragRecognizer = UIPanGestureRecognizer(target: self.delegate!.touchController!, action: "drag:")
+            input.addGestureRecognizer(dragRecognizer)
+            dragRecognizer.maximumNumberOfTouches = 1
+            
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self.delegate!.touchController!, action: "longTouch:")
+            
+            input.addGestureRecognizer(longPressRecognizer)
+            
+            self.elementElement  = activePage!.addElement(input, type: "navbar", point: recognizer.locationInView(self.delegate!.view))
+            
+            self.dragging = true;
+            self.draggedElement = input
+            
+            self.delegate!.hideAddElements()
+            
+        } else if(recognizer.state != UIGestureRecognizerState.Ended) {
+            self.translate(recognizer)
+            
+        } else if(recognizer.state == UIGestureRecognizerState.Ended) {
+            
+            self.clean();
+            
+        }
+    }
+    
     func spanInput(recognizer: UIPanGestureRecognizer) {
         let activePage = self.pagesCollection?.activePage!;
         
@@ -110,7 +214,7 @@ class AddElementsViewController: UIViewController {
             
             input.addGestureRecognizer(longPressRecognizer)
             
-            activePage!.addElement(input, type: "input")
+            self.elementElement  = activePage!.addElement(input, type: "input", point: recognizer.locationInView(self.delegate!.view))
             
             self.dragging = true;
             self.draggedElement = input
@@ -121,7 +225,22 @@ class AddElementsViewController: UIViewController {
             self.translate(recognizer)
             
         } else if(recognizer.state == UIGestureRecognizerState.Ended) {
+            
+            let point = recognizer.locationInView(self.delegate!.view)
+            
+            if let element = self.pagesCollection?.activePage?.getElement(point) {
+                if(element.type == "list") {
+                    let pointInside = recognizer.locationInView(element.uiElement)
+                    if(self.elementElement!.indexInPage != nil) {
+                        self.pagesCollection!.activePage?.moveToList(self.elementElement!, list: element)
+                        self.elementElement!.uiElement.center = pointInside
+                    }
+                    
+                }
+            }
+            
             self.clean();
+
         }
     }
 
@@ -141,8 +260,9 @@ class AddElementsViewController: UIViewController {
             let longPressRecognizer = UILongPressGestureRecognizer(target: self.delegate!.touchController!, action: "longTouch:")
             
             newLabel.addGestureRecognizer(longPressRecognizer)
-            
-            activePage!.addElement(newLabel, type: "label")
+           
+
+            self.elementElement  = activePage!.addElement(newLabel, type: "label", point: recognizer.locationInView(self.delegate!.view))
             
             self.dragging = true;
             self.draggedElement = newLabel
@@ -153,7 +273,22 @@ class AddElementsViewController: UIViewController {
             self.translate(recognizer)
             
         } else if(recognizer.state == UIGestureRecognizerState.Ended) {
+            
+            let point = recognizer.locationInView(self.delegate!.view)
+            
+            if let element = self.pagesCollection?.activePage?.getElement(point) {
+                if(element.type == "list") {
+                    let pointInside = recognizer.locationInView(element.uiElement)
+                    if(self.elementElement!.indexInPage != nil) {
+                        self.pagesCollection!.activePage?.moveToList(self.elementElement!, list: element)
+                        self.elementElement!.uiElement.center = pointInside
+                    }
+                    
+                }
+            }
+            
             self.clean();
+        
         }
     }
     
@@ -173,7 +308,7 @@ class AddElementsViewController: UIViewController {
             
             picturePlaceHolder.addGestureRecognizer(longPressRecognizer)
             
-            activePage!.addElement(picturePlaceHolder, type: "image")
+            self.elementElement  = activePage!.addElement(picturePlaceHolder, type: "image", point: recognizer.locationInView(self.delegate!.view))
             
             self.dragging = true;
             self.draggedElement = picturePlaceHolder
@@ -184,7 +319,21 @@ class AddElementsViewController: UIViewController {
             self.translate(recognizer)
             
         } else if(recognizer.state == UIGestureRecognizerState.Ended) {
+            
+            let point = recognizer.locationInView(self.delegate!.view)
+            
+            if let element = self.pagesCollection?.activePage?.getElement(point) {
+                if(element.type == "list") {
+                    let pointInside = recognizer.locationInView(element.uiElement)
+                    if(self.elementElement!.indexInPage != nil) {
+                        self.pagesCollection!.activePage?.moveToList(self.elementElement!, list: element)
+                        self.elementElement!.uiElement.center = pointInside
+                    }
+                    
+                }
+            }
             self.clean();
+
         }
     }
     
@@ -196,8 +345,8 @@ class AddElementsViewController: UIViewController {
     
     func clean() {
         self.draggedElement = nil
-        self.dragging = false
-        
+        self.dragging       = false
+        self.elementElement = nil
         self.delegate!.removeAddElements()
 
     }
@@ -224,7 +373,7 @@ class AddElementsViewController: UIViewController {
             
             newButton.addGestureRecognizer(longPressRecognizer)
             
-            activePage!.addElement(newButton, type: "button")
+            self.elementElement = activePage!.addElement(newButton, type: "button", point: recognizer.locationInView(self.delegate!.view))
 
             self.dragging = true;
             self.draggedElement = newButton
@@ -234,8 +383,20 @@ class AddElementsViewController: UIViewController {
         } else if(recognizer.state != UIGestureRecognizerState.Ended) {
             self.translate(recognizer)
         } else if(recognizer.state == UIGestureRecognizerState.Ended) {
+           
+            let point = recognizer.locationInView(self.delegate!.view)
+            
+            if let element = self.pagesCollection?.activePage?.getElement(point) {
+                if(element.type == "list") {
+                    let pointInside = recognizer.locationInView(element.uiElement)
+                    if(self.elementElement!.indexInPage != nil) {
+                        self.pagesCollection!.activePage?.moveToList(self.elementElement!, list: element)
+                        self.elementElement!.uiElement.center = pointInside
+                    }
+                    
+                }
+            }
             self.clean();
-
         }
         
         

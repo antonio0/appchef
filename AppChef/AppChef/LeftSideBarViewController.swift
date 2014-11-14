@@ -22,6 +22,7 @@ class LeftSideBarViewController: UITableViewController, UITableViewDataSource, U
 //    }
 
     var actions = ["Save","Sync","Play", "Submit to AppStore"];
+    var blurredLayer : UIVisualEffectView?
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -61,7 +62,13 @@ class LeftSideBarViewController: UITableViewController, UITableViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+        visualEffectView.frame = self.view.frame
+        self.blurredLayer = visualEffectView;
+        self.tableView.separatorStyle = .None;
+        self.view.insertSubview(self.blurredLayer!, atIndex: 0)
+        
         // Do any additional setup after loading the view.
     }
 
