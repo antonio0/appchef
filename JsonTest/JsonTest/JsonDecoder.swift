@@ -34,6 +34,8 @@ class JsonDecoder {
                 for jsonElement in jsonPage["elements"].arrayValue! {
                     var elementId = jsonElement["id"].integerValue
                     switch jsonElement["type"].stringValue! {
+                        case "navbar":
+                            addNavBar(prefix, id : pageId, navJson: jsonElement, middleOptional:middle, endOptional:"")
                         case "label":
                             addLabel(prefix, id : pageId, labelJson: jsonElement, middleOptional:middle, endOptional:"")
                         case "button":
@@ -70,13 +72,40 @@ class JsonDecoder {
         code.writeToFile(outputFile, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
     }
     
-    func addButton( prefix : String, id: Int, buttonJson: JSON, middleOptional : String, endOptional : String) {
+    func addNavBar( prefix : String, id: Int, navJson: JSON, middleOptional : String, endOptional : String ) {
+        let text = navJson["text"]
+        let navId = navJson["id"]
+        code = "\(code)\(prefix)(\(id)).Elements.addNavBar(\(navId), text: \"\(text)\")\n"
+        let prefixNavEl = "Pages!.getPage"
+        let middleOptional = "NavBar"
+        var endOptional = ", place: .left"
+        let buttonLeft = navJson["buttons"]["left"]
+        addNavButton(prefix, id: id, buttonJson: buttonLeft, middleOptional: middleOptional, endOptional: endOptional)
+        
+        endOptional = ", place: .right"
+        let buttonright = navJson["buttons"]["right"]
+        addNavButton(prefix, id: id, buttonJson: buttonright, middleOptional: middleOptional, endOptional: endOptional)
+    }
+    
+    func addNavButton( prefix : String, id: Int, buttonJson: JSON, middleOptional : String, endOptional : String ) {
+        let buttonId = buttonJson["id"]
+        let text = buttonJson["text"]
+        code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Button(\(buttonId), text:\"\(text)\"\(endOptional) )\n"
+    }
+    
+    func addButton( prefix : String, id: Int, buttonJson: JSON, middleOptional : String, endOptional : String ) {
         let buttonId = buttonJson["id"]
         let color = buttonJson["color"]
-        let text = buttonJson["text"]
         let pos = getPosition(buttonJson)
         let radius = buttonJson["radius"]
-        code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Button(\(buttonId), \"\(text)\", \"\(color)\", \(pos), \(radius) )\n"
+        if let text = buttonJson["text"].stringValue {
+            code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Button(\(buttonId), text:\"\(text)\", color: \"\(color)\", position: \(pos), radius: \(radius) )\n"
+        }
+        else
+        {
+            let textSource = buttonJson["textSource"]
+            code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Button(\(buttonId), textSource: \"\(textSource)\", color: \"\(color)\", position: \(pos), radius: \(radius) )\n"
+        }
     }
     
     func addLabel(prefix : String, id: Int, labelJson: JSON, middleOptional : String, endOptional : String) {
@@ -84,7 +113,14 @@ class JsonDecoder {
         let color = labelJson["color"]
         let text = labelJson["text"]
         let pos = getPosition(labelJson)
-        code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Label(\(labelId), \"\(text)\", \"\(color)\", \(pos) )\n"
+        if let text = labelJson["text"].stringValue {
+            code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Label(\(labelId), text:\"\(text)\", color:\"\(color)\", position:\(pos) )\n"
+        }
+        else
+        {
+            let textSource = labelJson["textSource"]
+            code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)Label(\(labelId), textSource:\"\(textSource)\", color:\"\(color)\", position:\(pos) )\n"
+        }
     }
     
     func addInputField(prefix : String, id: Int, inputJson : JSON, middleOptional : String, endOptional : String) {
@@ -93,7 +129,7 @@ class JsonDecoder {
         let radius = inputJson["radius"]
         let backgroundColor = inputJson["backgroundColor"]
         let placeHolder = inputJson["placeholder"]
-        code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)InputField(\(inputId), \(pos), \(radius), \(backgroundColor), \"\(placeHolder)\" )\n"
+        code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)InputField(\(inputId), position: \(pos), radius: \(radius), backgroundColor: \(backgroundColor), placeHolder: \"\(placeHolder)\" )\n"
     }
     
     func addTextBox(prefix : String, id: Int, textBoxJson : JSON, middleOptional : String, endOptional : String) {
@@ -102,7 +138,7 @@ class JsonDecoder {
         let radius = textBoxJson["radius"]
         let backgroundColor = textBoxJson["backgroundColor"]
         let placeHolder = textBoxJson["placeholder"]
-        code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)TextBox(\(inputId), \(pos), \(radius), \(backgroundColor), \"\(placeHolder)\" )\n"
+        code = "\(code)\(prefix)(\(id)).Elements.add\(middleOptional)TextBox(\(inputId), position: \(pos), radius: \(radius), backgroundColor: \(backgroundColor), placeHolder: \"\(placeHolder)\" )\n"
     }
     
     func getPosition(json: JSON ) -> String {
@@ -117,7 +153,7 @@ class JsonDecoder {
         let tableId = listJson["id"].integerValue!
         let pos = getPosition(listJson)
         let tableSource = listJson["source"]
-        code = "\(code)\(prefix)(\(id)).Elements.addStaticTable(\(tableId), source: \(tableSource), \(pos))\n"
+        code = "\(code)\(prefix)(\(id)).Elements.addStaticTable(\(tableId), source: \(tableSource), position: \(pos))\n"
         let cellsJson = listJson["cell"].arrayValue!
         let prefixCells = "Lists!.getList"
         let middle = "Dynamic"
