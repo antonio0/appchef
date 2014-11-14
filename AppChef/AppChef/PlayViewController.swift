@@ -10,12 +10,10 @@ import UIKit
 import Parse
 
 class PlayViewController: UIViewController {
-<<<<<<< HEAD
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-=======
 
     var window: UIWindow?
     
@@ -52,5 +50,4 @@ class PlayViewController: UIViewController {
     }
 
 
->>>>>>> b8f1676e15a1f2876d82af4e80759dfa60169f52
 }
