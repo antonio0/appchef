@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class DataSet {
     
@@ -14,10 +15,23 @@ class DataSet {
     
     var _keys: [String] = []
     
+    var _API: ExternalAPI?
+    
     var data: [[String: String]] = []
     
     init (id: Int, name: String, API: String, keys: [String]) {
         _keys = keys
+        _API = ExternalAPI(URI: API)
+        _API!.getData({ (result) -> Void in
+            println("hi")
+            for row in result {
+                self.add(row)
+            }
+            //        DataSets!.getDataSet(0)!.add(["one" : "the", "two": "quick", "three": "brown"])
+
+        })
+        
+        
     }
     
     init (id: Int, name: String, keys: [String]) {

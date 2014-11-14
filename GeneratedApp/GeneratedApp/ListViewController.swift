@@ -65,7 +65,7 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
         
         
         let row = _dataSet!.getRow(indexPath.row)
-        cell!.textLabel.text = row!["two"]
+        cell!.textLabel.text = row!["name"]
         
         return cell!
     }

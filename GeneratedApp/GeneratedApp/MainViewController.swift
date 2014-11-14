@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         DataSets = appDelegate?.DataSets
         
         play()
-    
+
     }
     
     
@@ -34,13 +34,10 @@ class ViewController: UIViewController {
         Pages!.create(1)
         
         
-        DataSets!.create(0, name: "items", API: "https://api.zalando.com/articles?pageSize=10", keys: [ "aasd", "asdasd"] )
+        DataSets!.create(0, name: "items", API: "https://xsdjhapslm.localtunnel.me", keys: [ "sku", "name", "color", "detail", "price", "brand"] )
         DataSets!.create(1, name: "basket", keys: [ "aasd", "asdasd"] )
         
-        
-        
-        DataSets!.getDataSet(0)!.add(["one" : "the", "two": "quick", "three": "brown"])
-        
+    
         Pages!.getPage(0)!.addList(0, source: 0)
         
 //        Lists!.getList(0).addElement()
