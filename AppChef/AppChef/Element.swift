@@ -58,7 +58,7 @@ class Element {
         var dictionary = [String: AnyObject]()
         
         dictionary["type"]  = "\(self.type)";
-        dictionary["id"]    = 0
+        dictionary["id"]    = self.id
         dictionary["frame"] = [
             "x"      : "\(element.uiElement.frame.origin.x)",
             "y"      : "\(element.uiElement.frame.origin.y)",

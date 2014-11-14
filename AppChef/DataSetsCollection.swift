@@ -18,7 +18,10 @@ class DataSetsCollection : NSObject {
     }
     
     func create(name:String, type: ModelType, keys: [String]) {
-        var id =  Int(arc4random_uniform(834752))
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+
+        
+        var id =  appDelegate.newID()
         var newDataSet = DataSet(name: name, type: type, id: id)
         newDataSet.keys = keys
         self.datasets[id] = newDataSet
