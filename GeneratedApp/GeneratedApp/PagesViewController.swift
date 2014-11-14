@@ -14,11 +14,12 @@ class PageViewController: UIViewController {
    
     var mainViewController: UIViewController?
     var appDelegate: AppDelegate?
+    var Elements: ElementsCollection?
 
-
-    // should set this in init
+    // basically the initialiser
     func setId(id: Int) {
         self._id = id
+        Elements = ElementsCollection(view: self.view)
     }
     
     override func viewDidLoad() {
@@ -41,14 +42,13 @@ class PageViewController: UIViewController {
     
     func addList(id: Int, source: Int) {
         
-        let listView = ListViewController()
+        var newList = appDelegate!.Lists!.create(id, viewController: self, source: source)
+        
         let dataSource = appDelegate!.DataSets?.getDataSet(source)
-        listView.setDataSet(dataSource!)
+        newList.setDataSet(dataSource!)
         
         
-        listView.view.center = self.view.center;
-        self.addChildViewController(listView)
-        self.view.addSubview(listView.view)
+        newList.view.center = self.view.center;
         
     }
     

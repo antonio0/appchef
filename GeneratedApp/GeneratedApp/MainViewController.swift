@@ -14,6 +14,7 @@ class ViewController: UIViewController {
 
     var Pages: PagesCollection?
     var DataSets: DataSetsCollection?
+    var Lists: ListsCollection?
     
     
     override func viewDidLoad() {
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
         Pages = appDelegate?.Pages
         DataSets = appDelegate?.DataSets
+        Lists = appDelegate?.Lists
         
         play()
 
@@ -34,13 +36,14 @@ class ViewController: UIViewController {
         Pages!.create(1)
         
         
-        DataSets!.create(0, name: "items", API: "https://xsdjhapslm.localtunnel.me", keys: [ "sku", "name", "color", "detail", "price", "brand"] )
+        DataSets!.create(0, name: "items", API: "https://hcssdmkprq.localtunnel.me", keys: [ "sku", "name", "color", "detail", "price", "brand"] )
         DataSets!.create(1, name: "basket", keys: [ "aasd", "asdasd"] )
         
     
         Pages!.getPage(0)!.addList(0, source: 0)
         
-//        Lists!.getList(0).addElement()
+        Lists!.getList(0)!.Elements.addDynamicLabel("name")
+        Lists!.getList(0)!.Elements.addDynamicLabel("price")
         
         
         Pages!.showPage(0)

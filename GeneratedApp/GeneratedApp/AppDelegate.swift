@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var Pages: PagesCollection?
     var DataSets: DataSetsCollection?
+    var Lists: ListsCollection?
 
     var mainViewController: UIViewController?
 
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainViewController = self.window!.rootViewController
         Pages = PagesCollection()
         DataSets = DataSetsCollection()
-
+        Lists = ListsCollection()
         
         return true
     }

@@ -13,6 +13,8 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
 
     var _dataSet: DataSet?
     
+    var Elements = ElementsCollection()
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -62,10 +64,42 @@ class ListViewController: UITableViewController, UITableViewDataSource, UITableV
         if (cell == nil) {
             cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
         }
-        
-        
+
         let row = _dataSet!.getRow(indexPath.row)
-        cell!.textLabel.text = row!["name"]
+        
+        var CellElements = ElementsCollection(view: cell!.contentView)
+        
+        for Obj in Elements.getElements() {
+            
+            var dataKey = Obj["source"] as String?
+            
+            if dataKey == nil {
+                continue
+            }
+            
+            println(Obj)
+            
+            for type in Obj.keys {
+                
+                if type == "source" {
+                    continue
+                }
+                
+                var element: AnyObject? = Obj[type]
+                
+                println(type)
+                
+                if type == "UILabel" {
+                    element = element as UILabel
+                    CellElements.addStaticLabel(row![dataKey!]!)
+                    println("adding \(row![dataKey!]!)")
+                }
+                
+            }
+        }
+        
+        
+        //cell!.textLabel.text = row!["name"]
         
         return cell!
     }
