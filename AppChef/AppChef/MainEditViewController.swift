@@ -17,8 +17,7 @@ enum SideBarShowing: Int {
 class MainEditViewController: UIViewController
 {
     
-    var editElement = EditElement(nibName: "EditElement", bundle: nil)
-
+//    var editElement = EditElement(nibName: "EditElement", bundle: nil)
     
     var pagesManager : PagesManagerViewController?
     var addElements  : AddElementsViewController?
@@ -45,6 +44,7 @@ class MainEditViewController: UIViewController
         self.dataSetsCollection = appDelegate.dataSetsCollection!;
         
         self.initElementsTouchController()
+
         
         self.initMenus()
         self.addGestureRecognizers()
@@ -323,7 +323,16 @@ class MainEditViewController: UIViewController
         
     }
 
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        recurseView(self.view);
+    }
     
+    func recurseView(view: UIView) {
+        for subview in view.subviews {
+            self.recurseView(subview as UIView);
+        }
+        view.resignFirstResponder();
+    }
 
     /*
     // MARK: - Navigation

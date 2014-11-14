@@ -216,6 +216,7 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
     
     func bindElementToModel(element: Element, dataSet: DataSet) {
     
+        bindElementModelController.setDelegate(self)
         bindElementModelController.currDataSource = dataSet.id
         bindElementModelController.currElement = element.id
         
@@ -232,6 +233,16 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
 
             }, completion: nil)
     }
+    
+
+    func closeModal () {
+        UIView.animateWithDuration(0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+        self.bindElementModelController.view.frame.origin.y = self.view.superview!.superview!.bounds.height + 500
+        
+        }, completion: nil)
+    
+    }
+
 
     var bindElementModelController = BindElementModelController(nibName: "BindElementModelController", bundle: nil)
 

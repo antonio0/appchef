@@ -39,6 +39,9 @@ class BindElementModelController: UIViewController, UITextFieldDelegate, UIPicke
     }
 
     
+    @IBAction func closeView(sender: AnyObject) {
+        _delegate!.closeModal()
+    }
 
 //    @IBAction func createAddAction(sender: AnyObject) {
 //// bindings?.addSourceBinding(dataSet: currDS!, el ement: currElement, key: "addToDataSet")
@@ -52,6 +55,14 @@ class BindElementModelController: UIViewController, UITextFieldDelegate, UIPicke
     func initialiseView() {
         showView(.Add)
     }
+    
+    var _delegate: DataSetsViewController?
+    
+    func setDelegate(delegate: DataSetsViewController) {
+        _delegate = delegate
+    }
+    
+    
     
     func showView(toShow: BindingType) {
         setAsSourceView.hidden   = true

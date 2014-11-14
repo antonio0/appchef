@@ -10,8 +10,36 @@ import Foundation
 import UIKit
 
 class EditElement: UIViewController {
+    
+    
+    
+    
+    @IBOutlet weak var textField: UITextField!
+    var _delegate: ElementsTouchController?
+    
+    func setDelegate(delegate: ElementsTouchController) {
+        _delegate = delegate
+    }
+    
+    var elementEditing: Element?
+    
+    func setElement (element: Element?) {
+        elementEditing = element
+    }
+    
+    var pages: [Int]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate        = UIApplication.sharedApplication().delegate as AppDelegate
+        let pagesCollection    = appDelegate.pagesCollection!;
+        var count = 0
+        
+        for _pages in pagesCollection.pages {
+            self.pages.append(count + 4)
+            count = count+1
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -20,4 +48,29 @@ class EditElement: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func done(sender: AnyObject) {
+        
+        if elementEditing == nil {
+            return
+        }
+        
+        if elementEditing!.uiElement is UIButton {
+            var elm = elementEditing!.uiElement as UIButton
+            elm.setTitle(textField.text, forState: .Normal)
+            
+        } else if elementEditing!.uiElement is UILabel {
+            var elm = elementEditing!.uiElement as UILabel
+
+            elm.text = textField.text
+        }
+        
+        _delegate!.closeModal()
+        
+    }
+    
+    
+    
+    
+    
 }

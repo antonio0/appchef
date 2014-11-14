@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditElement" customModule="AppChef" customModuleProvider="target">
             <connections>
+                <outlet property="textField" destination="N9I-sA-dKq" id="7Cm-mg-9bX"/>
                 <outlet property="view" destination="iN0-l3-epB" id="WhU-tl-Lal"/>
             </connections>
         </placeholder>
@@ -69,6 +70,9 @@
                     <state key="normal" title="Done">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="done:" destination="-1" eventType="touchUpInside" id="shn-4Z-akx"/>
+                    </connections>
                 </button>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EUK-QE-vti">
                     <rect key="frame" x="133" y="156" width="261" height="29"/>
