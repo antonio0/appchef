@@ -22,7 +22,7 @@
 		<key>14AB181B78B29D50937AC3E00ECB3742ECCD1D89</key>
 		<string>../../..</string>
 		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>../../../GeneratedApp/Alamofire/</string>
+		<string>../../../GeneratedApp/Alamofire</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/antonio0/appchef.git</string>

@@ -21,9 +21,10 @@ class ListsCollection {
         mainViewController = appDelegate.mainViewController!
     }
     
-    func create (id: Int, viewController: UIViewController, source: Int) -> ListViewController {
+    func create (id: Int, viewController: UIViewController, source: Int, size: CGRect) -> ListViewController {
         
         var newList = ListViewController()
+        newList.view.frame = size
         let dataSource = appDelegate.DataSets!.getDataSet(source)
         newList.setDataSet(dataSource!)
         

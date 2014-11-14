@@ -30,6 +30,7 @@ class ExternalAPI {
                 for (index: String, subJson: JSON) in json {
                     var row: [String: String] = [:]
                     for (key: String, subSubJson: JSON) in subJson {
+                        
                         let datum: String = "\(json[count][key])"
                         row[key] = datum
                     }
