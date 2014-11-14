@@ -102,6 +102,9 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
             }
         }
     }
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60.0
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -118,7 +121,8 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         
             cell!.textLabel.text = self.appDelegate!.dataSetsCollection!.datasets[indexPath.row].name;
         }
-        
+        cell!.selectionStyle = .None
+
             return cell!;
         
     }

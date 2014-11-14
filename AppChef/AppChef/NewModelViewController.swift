@@ -74,12 +74,8 @@ class NewModelViewController: UIViewController, UITextFieldDelegate {
         
         if toShow == .API {
             APIView.hidden = false
-//            AddData.frame.origin.y = 209 - 27
-//            AddData.frame.origin.y = 160
         } else {
             ParseView.hidden = false
-//            AddData.frame.origin.y = 209
-            ParseView.frame.origin.y = 160
         }
         
     }
@@ -88,10 +84,16 @@ class NewModelViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         appDelegate = UIApplication.sharedApplication().delegate as AppDelegate?
         initialiseView()
+
 //        self.dataSetName.becomeFirstResponder()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    override func viewDidLayoutSubviews() {
+        ParseView.frame.origin.y = 160
+        AddData.frame.origin.y = 215
+    }
+    
     func dismissKeyboard () {
         self.view.endEditing(true)
     }
