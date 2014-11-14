@@ -36,7 +36,13 @@ class LeftSideBarViewController: UITableViewController, UITableViewDataSource, U
         return cell!;
         
     }
-
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 1 {
+            let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+            println(appDelegate.pagesCollection?.toJSON())
+        }
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return people.count

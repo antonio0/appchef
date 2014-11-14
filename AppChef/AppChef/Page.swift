@@ -34,7 +34,7 @@ class Page {
     
     func addElement(uiViewElementToBeAdded: UIView, type: String) {
         let element = Element(uiElement: uiViewElementToBeAdded, type: type)
-        self.elememnts.append(element)
+        self.elements.append(element)
         self.view.addSubview(uiViewElementToBeAdded)
     }
     
@@ -47,7 +47,19 @@ class Page {
         return nil
     }
     
-    func toJSON() -> NSString {
-        return "hello"
+    func toDictionary() -> [String: AnyObject] {
+        var dictionary = [String: AnyObject]()
+        dictionary["id"] = 0;
+        
+        var elementsArray = [AnyObject]()
+        
+        for element in self.elements {
+            elementsArray.append(element.toDictionary())
+        }
+        
+        dictionary["elements"] = elementsArray;
+        
+        return dictionary
+        
     }
 }

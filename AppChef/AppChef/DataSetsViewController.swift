@@ -95,7 +95,6 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
             
             if(recognizer.state == .Ended) {
                 dragging = false
-
                 endMoveLine(recognizer.locationInView(mainVC!.view))
             } else {
                 moveLine(recognizer.locationInView(mainVC!.view))
