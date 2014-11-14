@@ -42,7 +42,13 @@ class LeftSideBarViewController: UITableViewController, UITableViewDataSource, U
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 1 {
             let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-            println(appDelegate.pagesCollection!.toJSON())
+            
+            var dictionary = [
+                "pages": appDelegate.pagesCollection!.toDictionary(),
+                "datasets": appDelegate.dataSetsCollection!.toDictionary()
+            ]
+            println(Helper.JSONStringify(dictionary, prettyPrinted: true))
+//            println(appDelegate.pagesCollection!.toJSON())
         } else if indexPath.row == 2 {
             let playController = PlayViewController();
             playController.view.frame = self.view.frame;

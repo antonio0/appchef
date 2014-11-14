@@ -24,16 +24,20 @@ class PagesCollection {
         return newPage
     }
     
-    func toJSON() -> String {
-        var dictionary = [String: AnyObject]();
+    func toDictionary() -> [AnyObject] {
         var pagesArray: [AnyObject] = [];
         
         for page in self.pages {
             pagesArray.append(page.toDictionary())
         }
         
-        dictionary["pages"] = pagesArray;
-        
+        return pagesArray;
+    }
+  
+    func toJSON() -> String {
+       
+        var dictionary = [String: AnyObject]();
+        dictionary["pages"] = self.toDictionary();
         return Helper.JSONStringify(dictionary, prettyPrinted: false)
     }
     

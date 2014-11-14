@@ -159,7 +159,7 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         mainVC!.shapeLayer.fillColor = UIColor.clearColor().CGColor;
         mainVC!.view.layer.addSublayer(mainVC!.shapeLayer)
         
-        if let foundElement = self.pagesCollection!.activePage?.getElement(to) {
+        if let foundElement = self.pagesCollection!.activePage?.getElementForDataSet(to) {
              startWiggle(foundElement.uiElement)
              self.wigglingElement = foundElement.uiElement
         } else {
@@ -209,7 +209,7 @@ class DataSetsViewController: UITableViewController, UITableViewDataSource, UITa
         mainVC!.shapeLayer.path = nil;
         
     
-        if let foundElement = self.pagesCollection!.activePage?.getElement(point) {
+        if let foundElement = self.pagesCollection!.activePage?.getElementForDataSet(point) {
             bindElementToModel(foundElement, dataSet:dataSet)
         }
     }

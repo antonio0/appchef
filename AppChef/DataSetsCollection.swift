@@ -32,8 +32,19 @@ class DataSetsCollection : NSObject {
         return datasets[id]
     }
     
-    func toJSON() {
+    func toDictionary() -> [AnyObject] {
         
+        var setToJson:[AnyObject] = []
+        
+        for set in datasets {
+            setToJson.append(set.1.toDictionary());
+        }
+        
+        return setToJson;
+    }
+    
+    func toJSON() -> String {
+        return Helper.JSONStringify(self.toDictionary(), prettyPrinted: false)
     }
     
 }

@@ -60,8 +60,8 @@ class Element {
         dictionary["type"]  = "\(self.type)";
         dictionary["id"]    = 0
         dictionary["frame"] = [
-            "x"      : "\(element.uiElement.frame.origin.x)",
-            "y"      : "\(element.uiElement.frame.origin.y)",
+            "x"      : "\(Int(element.uiElement.frame.origin.x))",
+            "y"      : "\(Int(element.uiElement.frame.origin.y))",
             "width"  : "\(element.uiElement.frame.size.width)",
             "height" : "\(element.uiElement.frame.size.height)"
         ];

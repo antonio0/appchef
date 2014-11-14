@@ -23,7 +23,7 @@ class EditElement: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    @IBAction func stepper(sender: AnyObject) {
+    @IBAction func stepper(sender: UIStepper) {
         pageLinkVal.text = Int(sender.value).description
     }
     

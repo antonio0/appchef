@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditElement" customModule="AppChef" customModuleProvider="target">
             <connections>
                 <outlet property="pageLinkVal" destination="cFb-h3-Ddn" id="HsK-hb-Ycb"/>
-                <outlet property="stepper" destination="Rcd-Rw-2uO" id="Pbu-ya-lmf"/>
                 <outlet property="textField" destination="N9I-sA-dKq" id="7Cm-mg-9bX"/>
                 <outlet property="view" destination="iN0-l3-epB" id="WhU-tl-Lal"/>
             </connections>

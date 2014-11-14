@@ -29,5 +29,15 @@ class DataSet {
         
     }
     
+    func toDictionary() -> [String: AnyObject]{
+        var dictionary: [String: AnyObject] = [:]
+        dictionary["id"] = id;
+        dictionary["keys"] = self.keys
+        dictionary["apiUrl"] = self.apiUrl
+        dictionary["parseObjectName"] = self.parseObjectName
+        
+        return dictionary
+    }
+    
     
 }

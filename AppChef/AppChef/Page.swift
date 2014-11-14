@@ -74,6 +74,31 @@ class Page {
         return element
     }
     
+    func getElementForDataSet  (point: CGPoint) -> Element? {
+        for element in self.elements {
+            
+//            CGRect frame = [firstView convertRect:buttons.frame fromView:secondView]
+            
+            for cellElement in element.cellElements {
+                let frame = cellElement.uiElement.convertRect(cellElement.uiElement.frame, fromView: self.view)
+                if CGRectContainsPoint(frame, point) {
+                    return cellElement
+                }
+            }
+            
+            if(element.type == "list") {
+                continue
+            }
+            
+            if CGRectContainsPoint(element.uiElement.frame, point) {
+                return element
+            }
+            
+        }
+        return nil
+    }
+
+    
     func getElement (point: CGPoint) -> Element? {
         for element in self.elements {
             
