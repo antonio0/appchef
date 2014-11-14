@@ -21,7 +21,7 @@ class LeftSideBarViewController: UITableViewController, UITableViewDataSource, U
 //        super.init(coder: aDecoder)
 //    }
 
-    var people = ["Save","Sync","Submit to AppStore"];
+    var actions = ["Save","Sync","Play", "Submit to AppStore"];
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -32,20 +32,30 @@ class LeftSideBarViewController: UITableViewController, UITableViewDataSource, U
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellId)
         }
         
-        cell!.textLabel.text = people[indexPath.row];
+//        cell!.
+        cell!.textLabel.text = actions[indexPath.row];
         return cell!;
         
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 1 {
             let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             println(appDelegate.pagesCollection!.toJSON())
+        } else if indexPath.row == 2 {
+            let playController = PlayViewController();
+            playController.view.frame = self.view.frame;
+            playController.view.backgroundColor = UIColor.redColor()
+            
+            self.presentViewController(playController, animated: true, completion: { () -> Void in
+                
+            })
         }
+        
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return people.count
+        return actions.count
     }
     
     

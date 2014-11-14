@@ -10,6 +10,7 @@
 		4DE1F6511A15F05D0037D349 /* DataSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1F6501A15F05D0037D349 /* DataSetsViewController.swift */; };
 		4DE1F6531A15F8000037D349 /* NewModelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DE1F6521A15F8000037D349 /* NewModelViewController.xib */; };
 		4DE1F6551A15F9910037D349 /* NewModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1F6541A15F9910037D349 /* NewModelViewController.swift */; };
+		90FD77941A1665580099E61F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FD77931A1665580099E61F /* PlayViewController.swift */; };
 		C5093C401A15DA7900B99A6B /* EditElementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5093C3E1A15DA7900B99A6B /* EditElementViewController.swift */; };
 		C5093C411A15DA7900B99A6B /* EditElementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5093C3F1A15DA7900B99A6B /* EditElementViewController.xib */; };
 		C5093C451A15E3AF00B99A6B /* DataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5093C441A15E3AF00B99A6B /* DataSet.swift */; };
@@ -57,6 +58,7 @@
 		4DE1F6501A15F05D0037D349 /* DataSetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSetsViewController.swift; sourceTree = "<group>"; };
 		4DE1F6521A15F8000037D349 /* NewModelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewModelViewController.xib; sourceTree = "<group>"; };
 		4DE1F6541A15F9910037D349 /* NewModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewModelViewController.swift; sourceTree = "<group>"; };
+		90FD77931A1665580099E61F /* PlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		C5093C3E1A15DA7900B99A6B /* EditElementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditElementViewController.swift; sourceTree = "<group>"; };
 		C5093C3F1A15DA7900B99A6B /* EditElementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditElementViewController.xib; sourceTree = "<group>"; };
 		C5093C441A15E3AF00B99A6B /* DataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSet.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				4DE1F6541A15F9910037D349 /* NewModelViewController.swift */,
 				C5DC85901A15679B008A2C7A /* LoginViewController.swift */,
 				C5DC85B01A1569D5008A2C7A /* WelcomeViewController.swift */,
+				90FD77931A1665580099E61F /* PlayViewController.swift */,
 				C5DC85B21A1569E5008A2C7A /* MainEditViewController.swift */,
 				C5DC85B41A156BB2008A2C7A /* RightSideViewController.swift */,
 				4DE1F6501A15F05D0037D349 /* DataSetsViewController.swift */,
@@ -377,6 +380,7 @@
 				C5DC85B31A1569E5008A2C7A /* MainEditViewController.swift in Sources */,
 				C5AF9E261A15905A00F82EAB /* PagesCollection.swift in Sources */,
 				C5DC85C61A156C61008A2C7A /* ViewTagEnumerator.swift in Sources */,
+				90FD77941A1665580099E61F /* PlayViewController.swift in Sources */,
 				C5DC85B61A156BB2008A2C7A /* RightSideViewController.swift in Sources */,
 				C5093C401A15DA7900B99A6B /* EditElementViewController.swift in Sources */,
 				C5AF9E2C1A1598A700F82EAB /* ElementsTouchController.swift in Sources */,
