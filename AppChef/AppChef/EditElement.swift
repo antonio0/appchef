@@ -11,8 +11,21 @@ import UIKit
 
 class EditElement: UIViewController {
     
+    @IBOutlet weak var pageLinkVal: UILabel!
     
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)  {
+        // Initialize variables.
+        
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
     
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    @IBAction func stepper(sender: AnyObject) {
+        pageLinkVal.text = Int(sender.value).description
+    }
     
     @IBOutlet weak var textField: UITextField!
     var _delegate: ElementsTouchController?
@@ -27,7 +40,7 @@ class EditElement: UIViewController {
         elementEditing = element
     }
     
-    var pages: [Int]
+    var pages: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

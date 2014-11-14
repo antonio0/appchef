@@ -263,7 +263,6 @@ class AddElementsViewController: UIViewController {
            
 
             self.elementElement  = activePage!.addElement(newLabel, type: "label", point: recognizer.locationInView(self.delegate!.view))
-            
             self.dragging = true;
             self.draggedElement = newLabel
             

@@ -310,11 +310,11 @@
 				TargetAttributes = {
 					C5DC85851A15679B008A2C7A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 756MSMTJ5A;
+						DevelopmentTeam = C22NCN7Y4U;
 					};
 					C5DC859D1A15679B008A2C7A = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 756MSMTJ5A;
+						DevelopmentTeam = 3Z3YCJN7UC;
 						TestTargetID = C5DC85851A15679B008A2C7A;
 					};
 				};
