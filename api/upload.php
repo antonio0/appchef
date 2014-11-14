@@ -1,27 +1,39 @@
 <?php
+#!/usr/bin/php
+ini_set("display_errors", 1);
+ini_set("track_errors", 1);
+ini_set("html_errors", 1);
+error_reporting(E_ALL);
 
 // app metadata from get params
 $appname = $_GET["appname"];
 $author = $_GET["author"];
 
 // json description of the app as post
-$json = $_POST("jsonapp");
+$json = $_POST["json"];
 
-$userpath = "projects/user-$author";
-if (!file_exists($userpath))
-  mkdir($userpath, 0777, true);
+$userpath = "/Applications/XAMPP/htdocs/projects/user-$author";
+if (!file_exists($userpath)) {
+  $old = umask(0);
+  mkdir($userpath,0777,true);
+  umask($old);
+
+
+}
+
 
 $apppath = "$userpath/app-$appname";
 if (!file_exists($apppath)) {
-    mkdir($apppath, 0777, true);
+   $old = umask(0);
+   mkdir($apppath, 0777, true);
+   umask($old);
 }
 
-$jsonfile = fopen("app.json","w");
-echo fwrite($jsonfile, $json);
+$jsonfile = fopen("$apppath/app.json","w");
+fwrite($jsonfile, $json);
 fclose($jsonfile);
+chmod("$apppath/app.json", 0777);
 
-echo exec("./jsonTest $jsonfile $apppath/jessies.txt");
+passthru("/Applications/XAMPP/htdocs/api/a.sh $apppath/app.json $apppath/jessies.txt");
 
-exec("python ../xcProjGenerator/genXCproj.py")
-
-?>
+passthru("python /Applications/XAMPP/htdocs/xcProjGenerator/genXCproj.py $author $appname");
